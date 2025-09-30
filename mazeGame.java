@@ -21,10 +21,11 @@ public class mazeGame {
 
 	public static void printMaze(char[][] maze) {
 
+		System.out.println("\n");
 		for (char[] row : maze) {
 			System.out.println(row);
 		}
-
+		System.out.println("\n");
 	}
 
 	static char[][] createMaze(int x, int y) {
@@ -45,7 +46,7 @@ public class mazeGame {
 		}
 
 		// pick a random point to then be Prims Mazed
-		int[] startPoint = { RANDOM.nextInt(1, x), RANDOM.nextInt(1, y) };
+		int[] startPoint = { RANDOM.nextInt(1, x - 1), RANDOM.nextInt(1, y - 1) };
 		// System.out.println(startPoint[0]);
 		// System.out.println(startPoint[1]);
 		maze[startPoint[0]][startPoint[1]] = PLAYER;
@@ -60,33 +61,35 @@ public class mazeGame {
 		while (!nextWalls.isEmpty()) {
 			// startPoint[0] < x - 1 & startPoint[1] < y - 1)
 			nextWalls.remove(RANDOM.nextInt(nextWalls.size()));
+			printMaze(maze);
 
 			// check all four cardinal directions:
-			if (maze[startPoint[0] + 1][startPoint[1]] == WALL & startPoint[0] < x - 1) { // if column+1 is
-													// a wall
+			if (maze[startPoint[0] + 1][startPoint[1]] == WALL & startPoint[0] < x - 1) {
+				// // if column-1 is a wall
 				maze[startPoint[0] + 1][startPoint[1]] = PATH;
 				startPoint[0]++;
 				Wall upWall = new Wall(startPoint[0] + 1, startPoint[1]);
 				nextWalls.add(upWall);
 
 			}
-			if (maze[startPoint[0] - 1][startPoint[1]] == WALL & startPoint[0] > 0) { // if column-1 is a
-													// wall
+			if (maze[startPoint[0] - 1][startPoint[1]] == WALL & startPoint[0] > 0) {
+				// // if column-1 is a wall
 				maze[startPoint[0] - 1][startPoint[1]] = PATH;
 				startPoint[0]--;
 				Wall downWall = new Wall(startPoint[0] - 1, startPoint[1]);
 				nextWalls.add(downWall);
 
 			}
-			if (maze[startPoint[0]][startPoint[1] + 1] == WALL & startPoint[1] < y - 1) { // if row+1 is a
-													// wall
+			if (maze[startPoint[0]][startPoint[1] + 1] == WALL & startPoint[1] < y - 1) {
+				// // if row+1 is a wall
 				maze[startPoint[0]][startPoint[1] + 1] = PATH;
 				startPoint[1]++;
 				Wall rightWall = new Wall(startPoint[0], startPoint[1] + 1);
 				nextWalls.add(rightWall);
 
 			}
-			if (maze[startPoint[0]][startPoint[1] - 1] == WALL & startPoint[1] > 0) { // if row-1 is a wall
+			if (maze[startPoint[0]][startPoint[1] - 1] == WALL & startPoint[1] > 0) {
+				// if row-1 is a wall
 				maze[startPoint[0]][startPoint[1] - 1] = PATH;
 				startPoint[1]--;
 				Wall leftWall = new Wall(startPoint[0], startPoint[1] - 1);
