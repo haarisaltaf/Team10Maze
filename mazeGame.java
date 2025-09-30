@@ -1,3 +1,9 @@
+// TODO: 
+// 5 buffs
+// 3 debuffs
+// 3 invisible effects
+//
+//
 // General hierarchy:
 // create a maze game in cli to then be transferred to gui;.
 // Basically need to create the game to the point it works in cli so can ensure maze algo works
@@ -64,7 +70,7 @@ public class mazeGame {
 			printMaze(maze);
 
 			// check all four cardinal directions:
-			if (maze[startPoint[0] + 1][startPoint[1]] == WALL & startPoint[0] < x - 1) {
+			if (maze[startPoint[0] + 1][startPoint[1]] == WALL & startPoint[0] < x - 2) {
 				// // if column-1 is a wall
 				maze[startPoint[0] + 1][startPoint[1]] = PATH;
 				startPoint[0]++;
@@ -72,7 +78,7 @@ public class mazeGame {
 				nextWalls.add(upWall);
 
 			}
-			if (maze[startPoint[0] - 1][startPoint[1]] == WALL & startPoint[0] > 0) {
+			if (maze[startPoint[0] - 1][startPoint[1]] == WALL & startPoint[0] > -1) {
 				// // if column-1 is a wall
 				maze[startPoint[0] - 1][startPoint[1]] = PATH;
 				startPoint[0]--;
@@ -80,7 +86,7 @@ public class mazeGame {
 				nextWalls.add(downWall);
 
 			}
-			if (maze[startPoint[0]][startPoint[1] + 1] == WALL & startPoint[1] < y - 1) {
+			if (maze[startPoint[0]][startPoint[1] + 1] == WALL & startPoint[1] < y - 2) {
 				// // if row+1 is a wall
 				maze[startPoint[0]][startPoint[1] + 1] = PATH;
 				startPoint[1]++;
@@ -88,7 +94,7 @@ public class mazeGame {
 				nextWalls.add(rightWall);
 
 			}
-			if (maze[startPoint[0]][startPoint[1] - 1] == WALL & startPoint[1] > 0) {
+			if (maze[startPoint[0]][startPoint[1] - 1] == WALL & startPoint[1] > -1) {
 				// if row-1 is a wall
 				maze[startPoint[0]][startPoint[1] - 1] = PATH;
 				startPoint[1]--;
