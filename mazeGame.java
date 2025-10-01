@@ -1,3 +1,4 @@
+// decomposition, pattern recognition, abstraction, 
 // TODO: 
 // 5 buffs
 // 3 debuffs
@@ -57,16 +58,16 @@ public class mazeGame {
 		// System.out.println(startPoint[1]);
 		maze[startPoint[0]][startPoint[1]] = PLAYER;
 
-		ArrayList<Wall> nextWalls = new ArrayList<Wall>();
+		ArrayList<Wall> frontier = new ArrayList<Wall>();
 		// from startpoint locate where next coord should be then add PATH if not WALL
 
 		Wall currWall = new Wall(startPoint[0], startPoint[1]);
-		nextWalls.add(currWall);
+		frontier.add(currWall);
 
 		// TODO: fix when hitting edge it finishes
-		while (!nextWalls.isEmpty()) {
+		while (!frontier.isEmpty()) {
 			// startPoint[0] < x - 1 & startPoint[1] < y - 1)
-			nextWalls.remove(RANDOM.nextInt(nextWalls.size()));
+			frontier.remove(RANDOM.nextInt(frontier.size()));
 			printMaze(maze);
 
 			// check all four cardinal directions:
@@ -75,7 +76,7 @@ public class mazeGame {
 				maze[startPoint[0] + 1][startPoint[1]] = PATH;
 				startPoint[0]++;
 				Wall upWall = new Wall(startPoint[0] + 1, startPoint[1]);
-				nextWalls.add(upWall);
+				frontier.add(upWall);
 
 			}
 			if (maze[startPoint[0] - 1][startPoint[1]] == WALL & startPoint[0] > -1) {
@@ -83,7 +84,7 @@ public class mazeGame {
 				maze[startPoint[0] - 1][startPoint[1]] = PATH;
 				startPoint[0]--;
 				Wall downWall = new Wall(startPoint[0] - 1, startPoint[1]);
-				nextWalls.add(downWall);
+				frontier.add(downWall);
 
 			}
 			if (maze[startPoint[0]][startPoint[1] + 1] == WALL & startPoint[1] < y - 2) {
@@ -91,7 +92,7 @@ public class mazeGame {
 				maze[startPoint[0]][startPoint[1] + 1] = PATH;
 				startPoint[1]++;
 				Wall rightWall = new Wall(startPoint[0], startPoint[1] + 1);
-				nextWalls.add(rightWall);
+				frontier.add(rightWall);
 
 			}
 			if (maze[startPoint[0]][startPoint[1] - 1] == WALL & startPoint[1] > -1) {
@@ -99,7 +100,7 @@ public class mazeGame {
 				maze[startPoint[0]][startPoint[1] - 1] = PATH;
 				startPoint[1]--;
 				Wall leftWall = new Wall(startPoint[0], startPoint[1] - 1);
-				nextWalls.add(leftWall);
+				frontier.add(leftWall);
 
 			}
 
