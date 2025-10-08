@@ -16,7 +16,7 @@ public class mazeGame extends ApplicationAdapter { // inheriting Application cla
     @Override
     public void create() {
         batch = new SpriteBatch(); // new creating batch image
-        image = new Texture("libgdx.png");
+        image = new Texture("SGQ_Dungeon/grounds_and_walls/grounds.png");
     }
 
     @Override
