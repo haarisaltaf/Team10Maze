@@ -51,7 +51,14 @@ Skin - Defines visual style of elements: text, image, font, etc.
 Button, TextButton, and ClickListener - Button element, subclass of button that shows text as a button, clickListener to handle click events
 
 #### Flow of Stage, Skin and Button to show how he setup flow would work for ui.
-1 - Create a stage
+1 - Create a stage and setInputProcessor so stage can recieve clicks.
+2 - Load Skin for the button, has prebuilt buttons but can use own assets.
+3 - Make the Button, setSize()/ setPosition()
+4 - stage.addActor(Button)
+5 - addListener() -- To capture signals such as clicking of button etc.
+
+#### How to call the stage?
+Stage draws itself automatically, just call in render()
 
 
 ### FAQ
@@ -61,3 +68,7 @@ Make your own .java classes for different parts of the game as needed. This is d
 
 #### The asset wants me to state their name/ link in order to use it, how and where should we do this?
 Important we have a collated place to hold this info, use "assets/usedAssetReferences.md."
+
+
+#### Why does Screen.render() need float delta passed-through?
+Needs delta to have the time since previous frame --  improves smoothness by using when previous frame was shown
