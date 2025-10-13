@@ -6,6 +6,8 @@ cd into this directory and type "./gradlew run" -- if on windows: "./gradlew.bat
 
 ### Relative path for the game.java itself (the game is stored here)
 #### core/src/main/java/com/Team10/Team10Maze/mazeGame.java
+mazeGame.java is our main entrypoint to game.
+Made it modular so can create classes for mainMenu, mazeMap1, etc.
 
 ### References and Notes
 References to the creators of assets in assets/usedAssetReferences.md
