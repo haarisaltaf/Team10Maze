@@ -18,6 +18,7 @@ These are the current tasks in individual functions/ files we want to tackle nex
 
 - Currently implementing the main menu to be able to go into the game itself.
     - Implemented the background image which sizes correctly - could in future implement with resize() game loop method.
-    ** Need to add buttons to quit or start game.
-
-- Once main menu done. MazeLevel java will need to be created to do a level.
+    - halfway done - start button done: Need to add buttons to quit or start game.
+    - Have clickable button size resize with window (use getBackgroundSize() in resize())
+    - Maze creation -- Kamso creating what maze will look like then whoever is most comfortable converting that to code will do
+         - Modularity for maze creation will be important as that will allow for us to just pass through the "maze" in whatever format we need for that map (eg comp sci building, piazza, etc.) then have the background change accordingly.
