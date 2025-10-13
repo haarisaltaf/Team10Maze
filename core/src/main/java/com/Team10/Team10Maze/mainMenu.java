@@ -65,6 +65,8 @@ public class mainMenu implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Clicked playButton: ");
+                game.setScreen(new map1Maze(game));
+                dispose();
             }
 
         });
@@ -95,6 +97,7 @@ public class mainMenu implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
+        stage.dispose();
         dungeonGroundsTexture.dispose();
     }
 
