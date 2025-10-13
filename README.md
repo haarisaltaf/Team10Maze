@@ -17,3 +17,7 @@ References to the creators of assets in assets/usedAssetReferences.md
 These are the current tasks in individual functions/ files we want to tackle next. Can be vague ideas but important to keep up-to-date on what we need to do so no double-coding can be done, wasting time.
 
 - Currently implementing the main menu to be able to go into the game itself.
+    - Implemented the background image which sizes correctly - could in future implement with resize() game loop method.
+    ** Need to add buttons to quit or start game.
+
+- Once main menu done. MazeLevel java will need to be created to do a level.

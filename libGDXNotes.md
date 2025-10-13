@@ -11,7 +11,7 @@ Running "./gradlew run":
 ### LibGDX Game Loop
 LibGDX manages our game using 3 MAIN LIFECYCLE METHODS (there are more but these are the main ones):
 
-    1 - Create()
+    1 - Create() -- Changes to Show() for implementing Screen
     2 - Render()
     3 - Dispose()
 
@@ -25,12 +25,33 @@ These are pre-written in the libGDX template (close to empty, allowing us to cha
 
 
 2 - Render()
-    This is what renders EACH FRAME (~60fps).
+    This is what renders EACH FRAME (~60fps). Called every frame.
     Clears the screen, handles input (arrow keys etc.), update game logic (collisions, movement, etc.), Draw everything needed.
 
 
 3 - Dispose()
+    Called at exit.
     Flushes GPU/ sound system memory on exit/ closure of game window.
+
+
+##### What are the other Lifecycle Methods?
+4 - Resize() - Called whenever screensize changes. (Could be used with getBackgroundSize)
+
+5 - Pause() - Called when app is paused ie switching apps. (Could incorporate a pause menu)
+
+6 - Resume() - Called when focus is back on app. (To go back into game from pausing)
+
+
+### How to have separate classes for different scenes?
+CHANGED TO INHERIT Game in mainMaze.java (main entry point) and IMPLEMENT Screen. This allows for easier switching between scenes/ classes.
+
+### Key Classes we will need
+Stage - Holds all UI elements on a screen: handles input and rendering.
+Skin - Defines visual style of elements: text, image, font, etc.
+Button, TextButton, and ClickListener - Button element, subclass of button that shows text as a button, clickListener to handle click events
+
+#### Flow of Stage, Skin and Button to show how he setup flow would work for ui.
+1 - Create a stage
 
 
 ### FAQ
