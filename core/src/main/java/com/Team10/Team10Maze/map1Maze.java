@@ -37,7 +37,7 @@ public class map1Maze implements Screen {
         "#.######.#####.#.#######.######.#",
         "#.#....#.....#.#.#.....#.#....#.#",
         "#.#.##.#####.#.#.#.###.#.#.##.#.#",
-        "#...##.....#.#.#...#.#.#.#....#.#",
+        "#...#......#.#.#...#.#.#.#....#.#",
         "#####.###.#...#####.#.#.#######.#",
         "#.....#.#.#.#.....#.#.#.....#...#",
         "#.#####.#.#.#####...#.#####.#.#.#",
@@ -51,11 +51,11 @@ public class map1Maze implements Screen {
         "#.#############.#.#####.#.#.#.#.#",
         "#...............#...........#...#",
         "###########.#############.###.#.#",
-        "#.........#...............#...#.#",
+        "#.........................#...#.#",
         "#.#######.###############.###.#.#",
         "#.......#.................#...#.#",
         "#.#####.###################.###.#",
-        "#.#...#.....................#...#",
+        "#.#.........................#...#",
         "#.#.#.#####################.#.###",
         "#.#.#.....................#.#...#",
         "#.#.#####################.#.###.#",
@@ -75,7 +75,7 @@ public class map1Maze implements Screen {
         font = new BitmapFont();
 
         this.game = game;
-        addTime(5f);
+        addTime(60f);
     }
 
     @Override public void show() {
@@ -111,8 +111,6 @@ public class map1Maze implements Screen {
         timeLeft += extraTime;
     }
 
-    // TODO: CHECK ALL OF THESE INPUTS AND HANDLE THEM CORRECTLY -- Refer to W as this is done relatively ok for now: few edge cases may be funky
-    // Also need to handle when reaching goal -- store where goal is then check if playerLocation == goalLocation every movement?
     public void handleInput() {
         
         if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
@@ -122,7 +120,7 @@ public class map1Maze implements Screen {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
             System.out.println("A");
-            moveCharacter('A', 1, 0);
+            moveCharacter('A', -1, 0);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
@@ -132,14 +130,12 @@ public class map1Maze implements Screen {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
             System.out.println("D");
-            moveCharacter('D', -1, 0);
+            moveCharacter('D', 1, 0);
         }
 
     }
 
     public void moveCharacter(char letter, int xDifference, int yDifference){
-        // letter == direction to move, checks if wall there and returns the same if so.
-        // If no wall, then move the player in that direction and return new map.
         // If G, then overlap and set as winner.
         if (yDifference != 0) {
 
@@ -166,8 +162,9 @@ public class map1Maze implements Screen {
             map.set(playerLocation[1]+yDifference, newLineAbove.toString());
 
             playerLocation[1] += yDifference;
-            if (playerLocation == goalLocation){
+            if (playerLocation[0] == goalLocation[0] && playerLocation[1] == goalLocation[1]){
                 goalReached();
+                return;
             }
 
             map.forEach( (n) -> { System.out.println(n);} );
@@ -179,24 +176,25 @@ public class map1Maze implements Screen {
 
             // Get player's current line
             String currLine = map.get(playerLocation[1]);
-            if (playerLocation[0]+xDifference > 33 || currLine.charAt(playerLocation[0]+xDifference) == '#') {
-                // Checks if they are past the limit or going into a wall
+            if (playerLocation[0]+xDifference > maxX || currLine.charAt(playerLocation[0]+xDifference) == '#') {
+                // Checks if they are past the limit or going into a wall and returns if so
                 return;
             }
 
+            // Remove the P from their current line
             currLine = currLine.replace('P', '.');
             map.set(playerLocation[1], currLine);
 
-
-            // ----- format lineAbove -----
+            // Add the P into their new X coordinate 
             StringBuilder newCurrLine = new StringBuilder(currLine);
             newCurrLine.setCharAt(playerLocation[0]+xDifference, 'P');
             map.set(playerLocation[1], newCurrLine.toString());
 
             // ---- Updating current location of where player is
             playerLocation[0] += xDifference;
-            if (playerLocation == goalLocation){
+            if (playerLocation[0] == goalLocation[0] && playerLocation[1] == goalLocation[1]){
                 goalReached();
+                return;
             }
 
             map.forEach( (n) -> { System.out.println(n);} );
@@ -207,6 +205,8 @@ public class map1Maze implements Screen {
     public void goalReached() {
 
         System.out.println("CONGRATULTATIOANS");
+        // game.setScreen(new mainMenu(game));
+        // dispose();
 
     }
 
