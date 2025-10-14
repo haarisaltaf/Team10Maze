@@ -24,6 +24,9 @@ import com.badlogic.gdx.Gdx; // gives direct edits to application window
 import com.badlogic.gdx.utils.ScreenUtils; // useful library for screen tasks eg clearing screen
 
 import com.badlogic.gdx.Input; // useful library for screen tasks eg clearing screen
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.lang.StringBuilder;
 
 public class map1Maze implements Screen {
     private final mazeGame game;
@@ -33,9 +36,9 @@ public class map1Maze implements Screen {
 
     // -------- TEST MAP FOR NOW -------- allows for us to sort out the movement and display for now whilst waiting for proper maze to be done then can replace
     // KEY: "." = open path, "#" = wall, "G" for goal
-    String[] MAP =  {
+    ArrayList<String> map =  new ArrayList<String> (Arrays.asList( //33x31
         "#################################",
-        "#.G...........#................##",
+        "#.G...........#...............###",
         "#.######.#####.#.#######.######.#",
         "#.#....#.....#.#.#.....#.#....#.#",
         "#.#.##.#####.#.#.#.###.#.#.##.#.#",
@@ -65,8 +68,8 @@ public class map1Maze implements Screen {
         "#.#############################.#",
         "#...............P...............#",
         "#################################"
-    };
-    public int[] playerLocation = {16, 26}; // x, y
+    ));
+    public int[] playerLocation = {16, 29}; // x, y
 
 
     public map1Maze(mazeGame game) {
@@ -110,27 +113,79 @@ public class map1Maze implements Screen {
         timeLeft += extraTime;
     }
 
+    // TODO: CHECK ALL OF THESE INPUTS AND HANDLE THEM CORRECTLY -- Refer to W as this is done relatively ok for now: few edge cases may be funky
     public void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-            System.out.println("W"); // TODO: check if moving to a wall then stop if so
+            System.out.println("W");
+            map.forEach( (n) -> { System.out.println(n);} );
+            if (playerLocation[1] <= 0) {
+                return;
+            }
+            moveCharacter('W');
             playerLocation[1] -= 1;
-            System.out.println(playerLocation);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
             System.out.println("A");
+            if (playerLocation[0] <= 0) {
+                return;
+            }
+            moveCharacter('A');
             playerLocation[0] -= 1;
-            System.out.println(playerLocation);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
             System.out.println("S");
+            if (playerLocation[1] >= 31) {
+                return;
+            }
+            moveCharacter('S');
             playerLocation[1] += 1;
-            System.out.println(playerLocation);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
             System.out.println("D");
+            if (playerLocation[0] >= 32) {
+                return;
+            }
+            moveCharacter('D');
             playerLocation[0] += 1;
-            System.out.println(playerLocation);
         }
+
+    }
+
+    public void moveCharacter(char letter){
+        // letter == direction to move, checks if wall there and returns the same if so.
+        // If no wall, then move the player in that direction and return new map.
+        // If G, then overlap and set as winner.
+        if (letter == 'W') {
+            String lineAbove = map.get(playerLocation[1]-1);
+            String currLine = map.get(playerLocation[1]);
+
+            // ----- dont move if wall -----
+            if (lineAbove.charAt(playerLocation[0]) == '#'){
+                return;
+            }
+
+            // ----- format currLine -----
+            currLine = currLine.replace('P', '.');
+            map.set(playerLocation[1], currLine);
+
+
+            // ----- format lineAbove -----
+            //this is where P will move to, replace at an index?
+            StringBuilder newLineAbove = new StringBuilder(lineAbove);
+            newLineAbove.setCharAt(playerLocation[0], 'P');
+            map.set(playerLocation[1]-1, newLineAbove.toString());
+        }
+
+        if (letter == 'A') {
+
+        }
+        if (letter == 'S') {
+
+        }
+        if (letter == 'D') {
+
+        }
+
     }
 
     @Override public void hide() { }
