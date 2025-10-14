@@ -35,8 +35,8 @@ public class map1Maze implements Screen {
         "#################################",
         "#.G...........#...............###",
         "#.######.#####.#.#######.######.#",
-        "#.#....#.....#.#.#.....#.#....#.#",
-        "#.#.##.#####.#.#.#.###.#.#.##.#.#",
+        "#.#....#.....#.#.#.....#.#......#",
+        "#.#.##.#####.#.#.#.###.#.#A##.#.#",
         "#...#......#.#.#...#.#.#.#....#.#",
         "#####.###.#...#####.#.#.#######.#",
         "#.....#.#.#.#.....#.#.#.....#...#",
@@ -66,6 +66,7 @@ public class map1Maze implements Screen {
     ));
     public int[] playerLocation = {16, 29}; // x, y
     public int[] goalLocation = {2, 1};
+    public int[] addTimeLocation = {26, 4};
 
 
     public map1Maze(mazeGame game) {
@@ -106,36 +107,36 @@ public class map1Maze implements Screen {
         batch.end();
     }
 
-    public void addTime(float extraTime) {
+    public void addTime(float extraTime) { // TODO: add this as a reached point on the map -- When reaching 'A' then call this
         System.out.println("adding " + extraTime + " seconds");
         timeLeft += extraTime;
     }
 
     public void handleInput() {
-        
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
             System.out.println("W");
-            moveCharacter('W', 0, -1);
+            moveCharacter(0, -1); // moved up
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
             System.out.println("A");
-            moveCharacter('A', -1, 0);
+            moveCharacter(-1, 0); // moved left
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
             System.out.println("S");
-            moveCharacter('S',  0, 1);
+            moveCharacter(0, 1); // moved down
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
             System.out.println("D");
-            moveCharacter('D', 1, 0);
+            moveCharacter(1, 0); // moved right
         }
 
     }
 
-    public void moveCharacter(char letter, int xDifference, int yDifference){
+    public void moveCharacter(int xDifference, int yDifference){
         // If G, then overlap and set as winner.
         if (yDifference != 0) {
 
@@ -162,8 +163,15 @@ public class map1Maze implements Screen {
             map.set(playerLocation[1]+yDifference, newLineAbove.toString());
 
             playerLocation[1] += yDifference;
+
+            // ---- Checking if reached a powerup or the goal
             if (playerLocation[0] == goalLocation[0] && playerLocation[1] == goalLocation[1]){
                 goalReached();
+                return;
+            }
+
+            if (playerLocation[0] == addTimeLocation[0] && playerLocation[1] == addTimeLocation[1]){
+                addTime(5f);
                 return;
             }
 
@@ -185,18 +193,24 @@ public class map1Maze implements Screen {
             currLine = currLine.replace('P', '.');
             map.set(playerLocation[1], currLine);
 
-            // Add the P into their new X coordinate 
+            // Add the P into their new X coordinate
             StringBuilder newCurrLine = new StringBuilder(currLine);
             newCurrLine.setCharAt(playerLocation[0]+xDifference, 'P');
             map.set(playerLocation[1], newCurrLine.toString());
 
             // ---- Updating current location of where player is
             playerLocation[0] += xDifference;
+
+            // ---- Checking if reached a powerup or the goal
             if (playerLocation[0] == goalLocation[0] && playerLocation[1] == goalLocation[1]){
                 goalReached();
                 return;
             }
 
+            if (playerLocation[0] == addTimeLocation[0] && playerLocation[1] == addTimeLocation[1]){
+                addTime(5f);
+                return;
+            }
             map.forEach( (n) -> { System.out.println(n);} );
             return;
         }
