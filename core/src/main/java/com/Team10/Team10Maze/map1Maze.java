@@ -1,32 +1,25 @@
 package com.Team10.Team10Maze;
 
-// Drawing and texture imports
+// Drawing, screen, and texture imports
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20; // controls openGL drawing
-import com.badlogic.gdx.graphics.Texture; // image object class -- draws .jpeg/ .png
-import com.badlogic.gdx.graphics.g2d.TextureRegion; // Allows for subsection of a jpeg to be taken
-import com.badlogic.gdx.graphics.g2d.SpriteBatch; // how gdx draws 2d images efficently
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 
-// stage, ui elements etc
-import com.badlogic.gdx.scenes.scene2d.ui.Button; // import button
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+// input handling
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.Input;
 
 // Application and Window class imports
-import com.badlogic.gdx.Gdx; // gives direct edits to application window
 import com.badlogic.gdx.utils.ScreenUtils; // useful library for screen tasks eg clearing screen
 
-import com.badlogic.gdx.Input; // useful library for screen tasks eg clearing screen
+// Algorithm-based/ datatype imports
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.lang.StringBuilder;
+
 
 public class map1Maze implements Screen {
     private final mazeGame game;
@@ -70,6 +63,7 @@ public class map1Maze implements Screen {
         "#################################"
     ));
     public int[] playerLocation = {16, 29}; // x, y
+    public int[] goalLocation = {2, 1}
 
 
     public map1Maze(mazeGame game) {
@@ -114,24 +108,24 @@ public class map1Maze implements Screen {
     }
 
     // TODO: CHECK ALL OF THESE INPUTS AND HANDLE THEM CORRECTLY -- Refer to W as this is done relatively ok for now: few edge cases may be funky
+    // Also need to handle when reaching goal -- store where goal is then check if playerLocation == goalLocation every movement?
     public void handleInput() {
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
             System.out.println("W");
-            map.forEach( (n) -> { System.out.println(n);} );
-            if (playerLocation[1] <= 0) {
-                return;
-            }
             moveCharacter('W');
-            playerLocation[1] -= 1;
+            map.forEach( (n) -> { System.out.println(n);} );
         }
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
             System.out.println("A");
-            if (playerLocation[0] <= 0) {
+            if (playerLocation[0] <= 0) { // TODO: move to within moveCharacter method like when handling W
                 return;
             }
             moveCharacter('A');
             playerLocation[0] -= 1;
         }
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
             System.out.println("S");
             if (playerLocation[1] >= 31) {
@@ -140,6 +134,7 @@ public class map1Maze implements Screen {
             moveCharacter('S');
             playerLocation[1] += 1;
         }
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
             System.out.println("D");
             if (playerLocation[0] >= 32) {
@@ -160,7 +155,7 @@ public class map1Maze implements Screen {
             String currLine = map.get(playerLocation[1]);
 
             // ----- dont move if wall -----
-            if (lineAbove.charAt(playerLocation[0]) == '#'){
+            if (lineAbove.charAt(playerLocation[0]) == '#' || playerLocation[1] <= 0){
                 return;
             }
 
@@ -170,12 +165,18 @@ public class map1Maze implements Screen {
 
 
             // ----- format lineAbove -----
-            //this is where P will move to, replace at an index?
             StringBuilder newLineAbove = new StringBuilder(lineAbove);
             newLineAbove.setCharAt(playerLocation[0], 'P');
             map.set(playerLocation[1]-1, newLineAbove.toString());
+
+            // ---- Updating current location of where player is
+            playerLocation[1] -= 1;
+            if (playerLocation == goalLocation){
+                goalReached;
+            }
         }
 
+        // TODO: handle movement for A and S and D
         if (letter == 'A') {
 
         }
@@ -185,6 +186,11 @@ public class map1Maze implements Screen {
         if (letter == 'D') {
 
         }
+    }
+
+    public void goalReached() {
+
+        System.out.println("CONGRATULTATIOANS");
 
     }
 
