@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20; // controls openGL drawing
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 // input handling
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -25,6 +26,8 @@ public class map1Maze implements Screen {
     private final mazeGame game;
     private SpriteBatch batch;
     private BitmapFont font;
+    private Stage stage;
+
     private float timeLeft = 3f;
     private int maxX = 33;
     private int maxY = 31;
@@ -67,7 +70,7 @@ public class map1Maze implements Screen {
     public int[] playerLocation = {16, 29}; // x, y
     public int[] goalLocation = {2, 1};
     public int[] addTimeLocation = {26, 4};
-
+// TODO: want to have the map be translated into a asset-based map with characters so really we just need to have the map and have a movement system that checks if the map has changed every frame and update accordingly
 
     public map1Maze(mazeGame game) {
         // passes through the superclass's (main Game) "this" instance
@@ -219,8 +222,8 @@ public class map1Maze implements Screen {
     public void goalReached() {
 
         System.out.println("CONGRATULTATIOANS");
-        // game.setScreen(new mainMenu(game));
-        // dispose();
+        game.setScreen(new mainMenu(game));
+        dispose();
 
     }
 
