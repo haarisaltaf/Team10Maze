@@ -32,6 +32,12 @@ SGQ_ui/game_ui/inventory.png
 SGQ_ui/game_ui/ui_elements.png
 SGQ_ui/inputs/gamepad.png
 SGQ_ui/inputs/keyboard.png
+Walls.tsx
+grounds.tsx
+groundsSized.tsx
+groundsSized2.tsx
+groundsSized3.tsx
+groundsSized4.tsx
 libgdx.png
 ui/font-list.fnt
 ui/font-subtitle.fnt
