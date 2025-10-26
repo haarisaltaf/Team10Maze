@@ -21,6 +21,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.lang.StringBuilder;
 
+// TODO: PRIORITY -- convert to tiled
+
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 public class map1Maze implements Screen {
     private final mazeGame game;
@@ -28,63 +34,30 @@ public class map1Maze implements Screen {
     private BitmapFont font;
     private Stage stage;
 
-    private float timeLeft = 3f;
-    private int maxX = 33;
-    private int maxY = 31;
+    private TiledMap tiledMap1;
+    private OrthogonalTiledMapRenderer mapRenderer;
+    private OrthographicCamera cameraMap1;
 
-    // -------- TEST MAP FOR NOW -------- allows for us to sort out the movement and display for now whilst waiting for proper maze to be done then can replace
-    // KEY: "." = open path, "#" = wall, "G" for goal
-    ArrayList<String> map =  new ArrayList<String> (Arrays.asList( //33x31
-        "#################################",
-        "#.G...........#...............###",
-        "#.######.#####.#.#######.######.#",
-        "#.#....#.....#.#.#.....#.#......#",
-        "#.#.##.#####.#.#.#.###.#.#A##.#.#",
-        "#...#......#.#.#...#.#.#.#....#.#",
-        "#####.###.#...#####.#.#.#######.#",
-        "#.....#.#.#.#.....#.#.#.....#...#",
-        "#.#####.#.#.#####...#.#####.#.#.#",
-        "#.#.....#.#.....#.#.#.....#.#.#.#",
-        "#.#.#####.#####.#.#.#####.#.#.#.#",
-        "#.#.#.........#.#.#.#.....#.#.#.#",
-        "#.#.#.#########.#.#.#.#####.#.#.#",
-        "#.#.#...........#.#.#.....#.#.#.#",
-        "#.#.###########.#.#.#####.#.#.#.#",
-        "#.#.............#.#.....#.#.#.#.#",
-        "#.#############.#.#####.#.#.#.#.#",
-        "#...............#...........#...#",
-        "###########.#############.###.#.#",
-        "#.........................#...#.#",
-        "#.#######.###############.###.#.#",
-        "#.......#.................#...#.#",
-        "#.#####.###################.###.#",
-        "#.#.........................#...#",
-        "#.#.#.#####################.#.###",
-        "#.#.#.....................#.#...#",
-        "#.#.#####################.#.###.#",
-        "#.#.......................#.....#",
-        "#.############.....############.#",
-        "#...............P...............#",
-        "#################################"
-    ));
-    public int[] playerLocation = {16, 29}; // x, y
-    public int[] goalLocation = {2, 1};
-    public int[] addTimeLocation = {26, 4};
-// TODO: want to have the map be translated into a asset-based map with characters so really we just need to have the map and have a movement system that checks if the map has changed every frame and update accordingly
+    private float timeLeft = 3f;
 
     public map1Maze(mazeGame game) {
-        // passes through the superclass's (main Game) "this" instance
-
-        batch = new SpriteBatch();
-        font = new BitmapFont();
-
         this.game = game;
         addTime(60f);
     }
 
     @Override public void show() {
-        map.forEach( (n) -> { System.out.println(n);} );
+        // load map1.tmx
+        tiledMap1 = new TmxMapLoader().load("maps/Team10Maze1.tmx");
+
+
+        // Renderer, 1 tile = 64 pixels
+        mapRenderer = new OrthogonalTiledMapRenderer(tiledMap1, 1f / 64f);
+
+        cameraMap1 = new OrthographicCamera();
+        cameraMap1.setToOrtho(false, 18, 18); // y-axis increasing towards top of screen, shows 18x18
     }
+
+
     @Override public void dispose() {
         font.dispose();
         batch.dispose();
@@ -92,25 +65,14 @@ public class map1Maze implements Screen {
 
     @Override
     public void render(float delta) {
-        handleInput();
-        timeLeft -= delta;
+        cameraMap1.update();
 
-        if (timeLeft <= 0f) {
-            game.setScreen(new mainMenu(game));
-            dispose();
-            return;
-        }
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        mapRenderer.setView(cameraMap1);
+        mapRenderer.render();
 
-        batch.begin();
-        font.getData().setScale(2f); // make text bigger
-        font.draw(batch, "You’re in the Maze!", 100, 300);
-        font.draw(batch, "Timer active: game will end in " + Math.max(0, (int)timeLeft) + "s", 100, 250);
-        batch.end();
     }
 
-    public void addTime(float extraTime) { // TODO: add this as a reached point on the map -- When reaching 'A' then call this
+    public void addTime(float extraTime) {
         System.out.println("adding " + extraTime + " seconds");
         timeLeft += extraTime;
     }
@@ -140,83 +102,7 @@ public class map1Maze implements Screen {
     }
 
     public void moveCharacter(int xDifference, int yDifference){
-        // If G, then overlap and set as winner.
-        if (yDifference != 0) {
-
-            // Get the line above the player's current line
-            String lineAbove = map.get(playerLocation[1]+yDifference);
-            if (lineAbove == null) {
-                // Return if that line doesn't exist
-                return;
-            }
-
-            String currLine = map.get(playerLocation[1]);
-            if (lineAbove.charAt(playerLocation[0]) == '#'){
-                // Return if they are trying to go through a wall
-                return;
-            }
-
-            // Replace the P with a . and set the current line without the P
-            currLine = currLine.replace('P', '.');
-            map.set(playerLocation[1], currLine);
-
-            // Replace the player's X coordinate with a P on their new Y coordinate
-            StringBuilder newLineAbove = new StringBuilder(lineAbove);
-            newLineAbove.setCharAt(playerLocation[0], 'P');
-            map.set(playerLocation[1]+yDifference, newLineAbove.toString());
-
-            playerLocation[1] += yDifference;
-
-            // ---- Checking if reached a powerup or the goal
-            if (playerLocation[0] == goalLocation[0] && playerLocation[1] == goalLocation[1]){
-                goalReached();
-                return;
-            }
-
-            if (playerLocation[0] == addTimeLocation[0] && playerLocation[1] == addTimeLocation[1]){
-                addTime(5f);
-                return;
-            }
-
-            map.forEach( (n) -> { System.out.println(n);} );
-            return;
-        }
-
-
-        if (xDifference != 0) {
-
-            // Get player's current line
-            String currLine = map.get(playerLocation[1]);
-            if (playerLocation[0]+xDifference > maxX || currLine.charAt(playerLocation[0]+xDifference) == '#') {
-                // Checks if they are past the limit or going into a wall and returns if so
-                return;
-            }
-
-            // Remove the P from their current line
-            currLine = currLine.replace('P', '.');
-            map.set(playerLocation[1], currLine);
-
-            // Add the P into their new X coordinate
-            StringBuilder newCurrLine = new StringBuilder(currLine);
-            newCurrLine.setCharAt(playerLocation[0]+xDifference, 'P');
-            map.set(playerLocation[1], newCurrLine.toString());
-
-            // ---- Updating current location of where player is
-            playerLocation[0] += xDifference;
-
-            // ---- Checking if reached a powerup or the goal
-            if (playerLocation[0] == goalLocation[0] && playerLocation[1] == goalLocation[1]){
-                goalReached();
-                return;
-            }
-
-            if (playerLocation[0] == addTimeLocation[0] && playerLocation[1] == addTimeLocation[1]){
-                addTime(5f);
-                return;
-            }
-            map.forEach( (n) -> { System.out.println(n);} );
-            return;
-        }
+        System.out.println("moving nowhting");
     }
 
     public void goalReached() {
