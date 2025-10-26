@@ -32,13 +32,10 @@ SGQ_ui/game_ui/inventory.png
 SGQ_ui/game_ui/ui_elements.png
 SGQ_ui/inputs/gamepad.png
 SGQ_ui/inputs/keyboard.png
-Walls.tsx
-grounds.tsx
-groundsSized.tsx
-groundsSized2.tsx
-groundsSized3.tsx
-groundsSized4.tsx
 libgdx.png
+maps/Team10Maze1.tmx
+maps/groundtileset.tsx
+maps/walls.tsx
 ui/font-list.fnt
 ui/font-subtitle.fnt
 ui/font-window.fnt

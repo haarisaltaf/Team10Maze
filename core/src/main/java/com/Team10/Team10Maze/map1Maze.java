@@ -23,22 +23,55 @@ import java.lang.StringBuilder;
 
 // TODO: PRIORITY -- convert to tiled
 
+// tiled map
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+// player
+import com.badlogic.gdx.math.Vector2;
 
 public class map1Maze implements Screen {
+    // main inits
     private final mazeGame game;
     private SpriteBatch batch;
     private BitmapFont font;
     private Stage stage;
 
+    // Tiled
+    // load map, create renderer, update camera and set renderer to view of camera, then render
     private TiledMap tiledMap1;
     private OrthogonalTiledMapRenderer mapRenderer;
+    private TiledMapTileLayer wallsLayer;
+    private TiledMapTileLayer groundLayer;
+    private TiledMapTileLayer specialsLayer;
+
+    // Player
+    // init players' sprite, sprite, and position
+    private Vector2 playerPosition;
+    private TextureRegion playerSprite;
+    private Texture playerTexture;
+
+    // Special locations
+    private Rectangle goalArea;
+    private Rectangle powerupArea;
+    private boolean powerupCollected = false;
+
+    // Camera and rendering
     private OrthographicCamera cameraMap1;
 
-    private float timeLeft = 3f;
+    // Game state
+    private float timeLeft = 60f;
+    private int tileSize = 64;
 
     public map1Maze(mazeGame game) {
         this.game = game;
@@ -46,16 +79,38 @@ public class map1Maze implements Screen {
     }
 
     @Override public void show() {
-        // load map1.tmx
-        tiledMap1 = new TmxMapLoader().load("maps/Team10Maze1.tmx");
+        // init rendering
+        batch = new SpriteBatch();
+        font = new BitmapFont();
+        // font.getData.setScale(2f);
 
 
-        // Renderer, 1 tile = 64 pixels
-        mapRenderer = new OrthogonalTiledMapRenderer(tiledMap1, 1f / 64f);
+        loadTiledMap();
 
         cameraMap1 = new OrthographicCamera();
         cameraMap1.setToOrtho(false, 18, 18); // y-axis increasing towards top of screen, shows 18x18
     }
+
+    private void loadTiledMap() {
+        // load map1.tmx
+        tiledMap1 = new TmxMapLoader().load("maps/Team10Maze1.tmx");
+
+        // Renderer, 1 tile = 64 pixels
+        mapRenderer = new OrthogonalTiledMapRenderer(tiledMap1, 1f / tileSize);
+
+        // get Tile Layers from tileMap -- set as: walls, specials, ground
+        groundLayer = (TiledMapTileLayer) tiledMap1.getLayers().get("ground");
+        wallsLayer = (TiledMapTileLayer) tiledMap1.getLayers().get("walls");
+
+        // will need to handle special types
+        handleSpecials();
+
+    }
+
+    public void handleSpecials() {
+        specialsLayer = (TiledMapTileLayer) tiledMap1.getLayers().get("specials");
+    }
+
 
 
     @Override public void dispose() {
