@@ -53,7 +53,7 @@ public class map1Maze implements Screen {
     private OrthogonalTiledMapRenderer mapRenderer;
     private TiledMapTileLayer wallsLayer;
     private TiledMapTileLayer groundLayer;
-    private TiledMapTileLayer specialsLayer;
+    private MapLayer specialsLayer;
 
     // Player
     // init players' sprite, sprite, and position
@@ -63,7 +63,7 @@ public class map1Maze implements Screen {
 
     // Special locations
     private Rectangle goalArea;
-    private Rectangle powerupArea;
+    private Rectangle addTimeArea;
     private boolean powerupCollected = false;
 
     // Camera and rendering
@@ -104,11 +104,49 @@ public class map1Maze implements Screen {
 
         // will need to handle special types
         handleSpecials();
-
     }
 
     public void handleSpecials() {
-        specialsLayer = (TiledMapTileLayer) tiledMap1.getLayers().get("specials");
+        MapLayer specialsLayer = tiledMap1.getLayers().get("specials");
+
+        // check the type property (goal, add_time, player_spawn)
+        for (MapObject special : specialsLayer.getObjects()) {
+            // in the map we have only set the rectangle to have type
+            // property so can easily skip non-rectangles
+            if (!(special instanceof RectangleMapObject)) continue;
+
+            // get rectangle map object, extravt the rectangle,
+            // then grab properties of rectangle
+            RectangleMapObject rectangleObject = (RectangleMapObject) object;
+            Rectangle currRectangle = rectangleObject.getRectangle();
+            MapProperties rectProperties = currRectangle.getProperties();
+
+            // grab type property
+            String type = rectProperties.get("type", String.class);
+            if (type == null) continue;
+
+            // pixel to tile coord conversion
+            float tileX = currRectangle.x / tileSize;
+            float tileY = currRectangle.y / tileSize;
+
+            // switch case to check if player_spawn/ goal/ add_time
+            // stores location of each to then check if overlap ever occurs
+            switch (type) {
+                case "player_spawn" :
+                    playerPosition = new Vector2(tileX, tileY);
+                    break;
+
+                case "add_time" :
+                // on map, areas have been drawn as 2x2 areas
+                    addTimeArea = new Rectangle(tileX, tileY, 2, 2);
+                    break;
+
+                case "goal" :
+                    goalArea = new Rectangle(tileX, tileY, 2, 2);
+                    break;
+            }
+        }
+        // TODO: handle if areas aren't found or dont exist
     }
 
 
