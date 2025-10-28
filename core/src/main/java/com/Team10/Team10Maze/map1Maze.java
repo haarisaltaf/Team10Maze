@@ -137,7 +137,7 @@ public class map1Maze implements Screen {
         // load map1.tmx
         tiledMap1 = new TmxMapLoader().load("maps/Team10Maze1.tmx");
 
-        // Renderer, 1 tile = 64 pixels
+        // Renderer, 1 tile = 32 pixels
         mapRenderer = new OrthogonalTiledMapRenderer(tiledMap1, 1f / tileSize);
 
         // get Tile Layers from tileMap -- set as: walls, specials, ground
@@ -220,11 +220,6 @@ public class map1Maze implements Screen {
 
         // updating timer
         timeLeft -= delta;
-        if (timeLeft <= 0f) {
-            game.setScreen(new mainMenu(game));
-            dispose();
-            return;
-        }
 
         cameraMap1.update();
 
@@ -329,7 +324,7 @@ public class map1Maze implements Screen {
     }
 
     public void goalReached() {
-
+        // TODO: add congratulations scene
         System.out.println("CONGRATULTATIOANS");
         endMap();
 
@@ -367,7 +362,7 @@ public class map1Maze implements Screen {
         }
     }
     @Override public void hide() { }
-    @Override public void resize(int width, int height) {}
+    @Override public void resize(int width, int height) {} // will handle resizing of app
     @Override public void pause() {}
     @Override public void resume() {}
 }
@@ -376,10 +371,12 @@ public class map1Maze implements Screen {
 
 // OVERALL TODOS:
 //      cleanup assets -- Map cleanup and sprite cleanup
-//      add VISIBLE GOAL AND POWERUP
+//      add VISIBLE GOAL AND POWERUP ON THE MAP
 //      ADD CHASER
 //      ADD DEBUFF -- look at addTime function and change a lil
 //      add more powerups -- look at addTime and change a bit
-//      Pause menu
-//      clear screen upon reaching goal properyl so no glitchy background
-//      HAVE IT WORK WHEN FULL SCREENED
+
+    //      WHO CARES:
+    //      Pause menu
+    //      clear screen upon reaching goal properyl so no glitchy background
+    //      HAVE IT WORK WHEN FULL SCREENED
