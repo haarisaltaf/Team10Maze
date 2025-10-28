@@ -28,6 +28,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -84,11 +85,12 @@ public class map1Maze implements Screen {
         font = new BitmapFont();
         // font.getData.setScale(2f);
 
-
         loadTiledMap();
+        System.out.println("shouldve handled specials");
 
         cameraMap1 = new OrthographicCamera();
-        cameraMap1.setToOrtho(false, 18, 18); // y-axis increasing towards top of screen, shows 18x18
+        // y-axis increasing towards top of screen, shows 18x18
+        cameraMap1.setToOrtho(false, 18, 18);
     }
 
     private void loadTiledMap() {
@@ -103,46 +105,57 @@ public class map1Maze implements Screen {
         wallsLayer = (TiledMapTileLayer) tiledMap1.getLayers().get("walls");
 
         // will need to handle special types
+        // saved as class attributes (playerPosition, addTimeArea, goalArea)
         handleSpecials();
+        System.out.println("in loadTiledMap but after specials shouldbe handled");
     }
 
     public void handleSpecials() {
+        System.out.println("before continue");
         MapLayer specialsLayer = tiledMap1.getLayers().get("specials");
+        MapObjects specials = specialsLayer.getObjects();
 
+        specials.forEach(specialEach -> System.out.println(specialEach));
         // check the type property (goal, add_time, player_spawn)
         for (MapObject special : specialsLayer.getObjects()) {
             // in the map we have only set the rectangle to have type
             // property so can easily skip non-rectangles
             if (!(special instanceof RectangleMapObject)) continue;
+            System.out.println("after continue");
+
 
             // get rectangle map object, extravt the rectangle,
             // then grab properties of rectangle
-            RectangleMapObject rectangleObject = (RectangleMapObject) object;
-            Rectangle currRectangle = rectangleObject.getRectangle();
-            MapProperties rectProperties = currRectangle.getProperties();
+            RectangleMapObject rectangleObject = (RectangleMapObject) special;
+            MapProperties rectProperties = rectangleObject.getProperties();
 
             // grab type property
             String type = rectProperties.get("type", String.class);
             if (type == null) continue;
 
             // pixel to tile coord conversion
-            float tileX = currRectangle.x / tileSize;
-            float tileY = currRectangle.y / tileSize;
+            Rectangle currRectangle = rectangleObject.getRectangle();
+            float tileX = currRectangle.getX() / tileSize;
+            float tileY = currRectangle.getY() / tileSize;
 
             // switch case to check if player_spawn/ goal/ add_time
             // stores location of each to then check if overlap ever occurs
+            System.out.println("checking type");
             switch (type) {
                 case "player_spawn" :
                     playerPosition = new Vector2(tileX, tileY);
+                    System.out.println("Found player spawn at: " + playerPosition);
                     break;
 
                 case "add_time" :
                 // on map, areas have been drawn as 2x2 areas
                     addTimeArea = new Rectangle(tileX, tileY, 2, 2);
+                    System.out.println("Found addTime at: (" + tileX + ", " + tileY + ")");
                     break;
 
                 case "goal" :
                     goalArea = new Rectangle(tileX, tileY, 2, 2);
+                    System.out.println("Found goalArea at: (" + tileX + ", " + tileY + ")");
                     break;
             }
         }

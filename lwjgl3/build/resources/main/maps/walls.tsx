@@ -4,17 +4,17 @@
   <property name="type" value="player_spawn"/>
  </properties>
  <image source="../SGQ_Dungeon/all_unclassified/walls.png" trans="ff00ff" width="224" height="256"/>
- <tile id="16">
+ <tile id="16" type="addTime">
   <properties>
    <property name="type" value="add_time"/>
   </properties>
  </tile>
- <tile id="17">
+ <tile id="17" type="goal">
   <properties>
    <property name="type" value="goal"/>
   </properties>
  </tile>
- <tile id="24">
+ <tile id="24" type="spawn">
   <properties>
    <property name="type" value="player_spawn"/>
   </properties>

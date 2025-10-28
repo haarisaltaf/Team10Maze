@@ -32,10 +32,17 @@ SGQ_ui/game_ui/inventory.png
 SGQ_ui/game_ui/ui_elements.png
 SGQ_ui/inputs/gamepad.png
 SGQ_ui/inputs/keyboard.png
+hs_err_pid12736.log
+hs_err_pid12830.log
+hs_err_pid12980.log
 libgdx.png
 maps/Team10Maze1.tmx
 maps/groundtileset.tsx
+maps/old_Team10Maze1.tmx
 maps/walls.tsx
+replay_pid12736.log
+replay_pid12830.log
+replay_pid12980.log
 ui/font-list.fnt
 ui/font-subtitle.fnt
 ui/font-window.fnt
