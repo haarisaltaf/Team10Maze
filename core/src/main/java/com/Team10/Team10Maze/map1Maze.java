@@ -72,7 +72,7 @@ public class map1Maze implements Screen {
 
     // Game state
     private float timeLeft = 60f;
-    private int tileSize = 64;
+    private int tileSize = 32;
 
     public map1Maze(mazeGame game) {
         this.game = game;
@@ -101,7 +101,7 @@ public class map1Maze implements Screen {
         playerTexture = new Texture("SGQ_Dungeon/characters/main/elf.png");
 
         // TODO: change sprite to face correct direction of movement
-        playerSprite = new TextureRegion(playerTexture, 16, 16);
+        playerSprite = new TextureRegion(playerTexture, 0, 0, 16, 16);
         System.out.println("Player sprite loaded from tileset");
 
     }
@@ -203,11 +203,15 @@ public class map1Maze implements Screen {
     @Override public void dispose() {
         font.dispose();
         batch.dispose();
+        tiledMap1.dispose();
+        mapRenderer.dispose();
+        playerTexture.dispose();
     }
 
     @Override
     public void render(float delta) {
         // update camera, clear screen, render camera
+        handleInput();
         cameraMap1.update();
 
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
@@ -233,29 +237,48 @@ public class map1Maze implements Screen {
     public void handleInput() {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-            System.out.println("W");
-            moveCharacter(0, -1); // moved up
+            moveCharacter(0, 1);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-            System.out.println("A");
-            moveCharacter(-1, 0); // moved left
+            moveCharacter(-1, 0);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-            System.out.println("S");
-            moveCharacter(0, 1); // moved down
+            moveCharacter(0, -1);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-            System.out.println("D");
-            moveCharacter(1, 0); // moved right
+            moveCharacter(1, 0);
         }
-
     }
 
     public void moveCharacter(int xDifference, int yDifference){
-        System.out.println("moving nowhting");
+        // grab new location
+        float newX = playerPosition.x + xDifference;
+        float newY = playerPosition.y + yDifference;
+
+        // check map bounds -- return if at edge
+        if ((newX < 0 || newX >= wallsLayer.getWidth()) ||
+            (newY < 0 || newY >= wallsLayer.getHeight())) {
+            System.out.println("Movement blocked - out of bounds");
+            return;
+        }
+
+        // Check collision with walls layer
+        TiledMapTileLayer.Cell wallCell = wallsLayer.getCell((int)newX, (int)newY);
+        if (wallCell != null && wallCell.getTile() != null) {
+            System.out.println("Movement blocked - wall");
+            return;
+        }
+
+        // movement is valid -- set playerPosition to new position then update camera
+        playerPosition.set(newX, newY);
+        System.out.println("Player moved to: " + playerPosition);
+
+        updateCamera();
+
+        checkSpecialTileCollision();
     }
 
     public void goalReached() {
@@ -266,6 +289,21 @@ public class map1Maze implements Screen {
 
     }
 
+    private void checkSpecialTileCollision() {
+        // Check goal first - end game
+        if (goalArea != null && goalArea.contains(playerPosition)) {
+            System.out.println("GOAL REACHED! You win!");
+            goalReached();
+            return;
+        }
+
+        // Check addTime
+        if (!powerupCollected && addTimeArea != null && addTimeArea.contains(playerPosition)) {
+            System.out.println("Power-up collected! +5 seconds");
+            addTime(5f);
+            powerupCollected = true;
+        }
+    }
     @Override public void hide() { }
     @Override public void resize(int width, int height) {}
     @Override public void pause() {}
