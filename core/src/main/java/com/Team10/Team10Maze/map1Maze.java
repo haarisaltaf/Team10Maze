@@ -86,11 +86,51 @@ public class map1Maze implements Screen {
         // font.getData.setScale(2f);
 
         loadTiledMap();
-        System.out.println("shouldve handled specials");
 
         cameraMap1 = new OrthographicCamera();
         // y-axis increasing towards top of screen, shows 18x18
         cameraMap1.setToOrtho(false, 18, 18);
+
+        loadPlayerSprite();
+
+        updateCamera();
+    }
+
+    private void loadPlayerSprite() {
+
+        playerTexture = new Texture("SGQ_Dungeon/characters/main/elf.png");
+
+        // TODO: change sprite to face correct direction of movement
+        playerSprite = new TextureRegion(playerTexture, 16, 16);
+        System.out.println("Player sprite loaded from tileset");
+
+    }
+
+    private void updateCamera() {
+
+        //setting camera to follow playerPosition + half a coord, overhead of 0 as orthographic camera so depth dont matterereerer
+        cameraMap1.position.set(playerPosition.x + 0.5f, playerPosition.y + 0.5f, 0);
+
+        int mapWidth = wallsLayer.getWidth();
+        int mapHeight = wallsLayer.getHeight();
+
+        // now want to ensure the camera cant go OOB/ only show mainly the map itself
+
+        // calc half of viewportWidth/ height
+        // character position +- half of the viewport in x and y:w
+
+        float halfViewportWidth = cameraMap1.viewportWidth / 2f;
+        float halfViewportHeight = cameraMap1.viewportHeight / 2f;
+
+        // halt camera's x position so viewport never shows past left or right edges
+        cameraMap1.position.x = Math.max(halfViewportWidth,
+            Math.min(mapWidth - halfViewportWidth, cameraMap1.position.x));
+
+        // halt camera's y position so viewport never shows past top or bottom edges
+        cameraMap1.position.y = Math.max(halfViewportHeight,
+            Math.min(mapHeight - halfViewportHeight, cameraMap1.position.y));
+
+        cameraMap1.update();
     }
 
     private void loadTiledMap() {
@@ -107,21 +147,17 @@ public class map1Maze implements Screen {
         // will need to handle special types
         // saved as class attributes (playerPosition, addTimeArea, goalArea)
         handleSpecials();
-        System.out.println("in loadTiledMap but after specials shouldbe handled");
     }
 
     public void handleSpecials() {
-        System.out.println("before continue");
         MapLayer specialsLayer = tiledMap1.getLayers().get("specials");
         MapObjects specials = specialsLayer.getObjects();
 
-        specials.forEach(specialEach -> System.out.println(specialEach));
         // check the type property (goal, add_time, player_spawn)
         for (MapObject special : specialsLayer.getObjects()) {
             // in the map we have only set the rectangle to have type
             // property so can easily skip non-rectangles
             if (!(special instanceof RectangleMapObject)) continue;
-            System.out.println("after continue");
 
 
             // get rectangle map object, extravt the rectangle,
@@ -159,7 +195,7 @@ public class map1Maze implements Screen {
                     break;
             }
         }
-        // TODO: handle if areas aren't found or dont exist
+        // TODO: handle if areas aren't found or dont exist -- moreso just edge case
     }
 
 
@@ -171,10 +207,21 @@ public class map1Maze implements Screen {
 
     @Override
     public void render(float delta) {
+        // update camera, clear screen, render camera
         cameraMap1.update();
+
+        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         mapRenderer.setView(cameraMap1);
         mapRenderer.render();
+
+        // drawing sprite using camera location
+        batch.setProjectionMatrix(cameraMap1.combined);
+        batch.begin();
+        // sprite has size of 1x1
+        batch.draw(playerSprite, playerPosition.x, playerPosition.y, 1f, 1f);
+        batch.end();
 
     }
 
