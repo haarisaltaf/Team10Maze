@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.lang.StringBuilder;
 
-// TODO: PRIORITY -- convert to tiled
-
 // tiled map
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -65,7 +63,7 @@ public class map1Maze implements Screen {
     // Special locations
     private Rectangle goalArea;
     private Rectangle addTimeArea;
-    private boolean powerupCollected = false;
+    private boolean addTimeCollected = false;
 
     // Camera and rendering
     private OrthographicCamera cameraMap1;
@@ -73,10 +71,12 @@ public class map1Maze implements Screen {
     // Game state
     private float timeLeft = 60f;
     private int tileSize = 32;
+    private boolean gameEnding = false; // flag to prevent crash when getting goal
+    // checks if gameending == True then goes to main menu as finished
+
 
     public map1Maze(mazeGame game) {
         this.game = game;
-        addTime(60f);
     }
 
     @Override public void show() {
@@ -210,8 +210,22 @@ public class map1Maze implements Screen {
 
     @Override
     public void render(float delta) {
+        // if gameEnding == true then endMap() has already been called so can just return;
+        if (gameEnding) {
+            return;
+        }
+
         // update camera, clear screen, render camera
         handleInput();
+
+        // updating timer
+        timeLeft -= delta;
+        if (timeLeft <= 0f) {
+            game.setScreen(new mainMenu(game));
+            dispose();
+            return;
+        }
+
         cameraMap1.update();
 
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
@@ -227,6 +241,39 @@ public class map1Maze implements Screen {
         batch.draw(playerSprite, playerPosition.x, playerPosition.y, 1f, 1f);
         batch.end();
 
+        // rendering on-screen ui
+        renderUI();
+
+        // exit to mainmenu if run out of time
+        if (timeLeft <= 0f) {
+            System.out.println("Time's up! Game Over");
+            endMap(); // method to move back to main menu
+            return;
+        }
+
+    }
+
+
+    private void renderUI() {
+        // setting as a projection to the view itself so doesnt move with camera movement
+        batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.begin();
+
+        // adding timer
+        String timerText = "Timer: " + Math.max(0, (int)timeLeft) + "s";
+
+        // draw timer
+        font.draw(batch, timerText, 20, 60);
+
+        // show on-screen controls
+        font.draw(batch, "WASD to move", 20, 40);
+
+        // showing if addTime has been collected
+        if (addTimeCollected) {
+            font.draw(batch, "addTime collected!", 20, 80);
+        }
+
+        batch.end();
     }
 
     public void addTime(float extraTime) {
@@ -274,7 +321,7 @@ public class map1Maze implements Screen {
 
         // movement is valid -- set playerPosition to new position then update camera
         playerPosition.set(newX, newY);
-        System.out.println("Player moved to: " + playerPosition);
+        System.out.println("player moved to: " + playerPosition);
 
         updateCamera();
 
@@ -284,8 +331,23 @@ public class map1Maze implements Screen {
     public void goalReached() {
 
         System.out.println("CONGRATULTATIOANS");
-        game.setScreen(new mainMenu(game));
-        dispose();
+        endMap();
+
+    }
+
+    private void endMap() {
+        gameEnding = true;
+
+        // setting new runnable stops crashing when reaching end goal
+        // queues transition to mainMenu for NEXT frame so doesnt crash
+        // when trying to load new screen on same frame
+        Gdx.app.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                game.setScreen(new mainMenu(game));
+                dispose();
+            }
+        });
 
     }
 
@@ -298,10 +360,10 @@ public class map1Maze implements Screen {
         }
 
         // Check addTime
-        if (!powerupCollected && addTimeArea != null && addTimeArea.contains(playerPosition)) {
-            System.out.println("Power-up collected! +5 seconds");
+        if (!addTimeCollected && addTimeArea != null && addTimeArea.contains(playerPosition)) {
+            System.out.println("addtime collected! +5 seconds");
             addTime(5f);
-            powerupCollected = true;
+            addTimeCollected = true;
         }
     }
     @Override public void hide() { }
@@ -309,3 +371,15 @@ public class map1Maze implements Screen {
     @Override public void pause() {}
     @Override public void resume() {}
 }
+
+
+
+// OVERALL TODOS:
+//      cleanup assets -- Map cleanup and sprite cleanup
+//      add VISIBLE GOAL AND POWERUP
+//      ADD CHASER
+//      ADD DEBUFF -- look at addTime function and change a lil
+//      add more powerups -- look at addTime and change a bit
+//      Pause menu
+//      clear screen upon reaching goal properyl so no glitchy background
+//      HAVE IT WORK WHEN FULL SCREENED
