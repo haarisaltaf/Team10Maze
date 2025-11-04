@@ -63,7 +63,9 @@ public class map1Maze implements Screen {
     // Special locations
     private Rectangle goalArea;
     private Rectangle addTimeArea;
+    private Rectangle decreaseTimeArea;
     private boolean addTimeCollected = false;
+    private boolean decreaseTimeCollected = false;
 
     // Camera and rendering
     private OrthographicCamera cameraMap1;
@@ -193,7 +195,12 @@ public class map1Maze implements Screen {
                     goalArea = new Rectangle(tileX, tileY, 2, 2);
                     System.out.println("Found goalArea at: (" + tileX + ", " + tileY + ")");
                     break;
+
+                case "decrease_time" :
+                    decreaseTimeArea = new Rectangle(tileX, tileY, 2, 2);
+                    System.out.println("Found decreaseTimeArea at: (" + tileX + ", " + tileY + ")");
             }
+            // remember to add to checkSpecialTileCollision() to handle when playerPosition overlaps
         }
         // TODO: handle if areas aren't found or dont exist -- moreso just edge case
     }
@@ -268,6 +275,10 @@ public class map1Maze implements Screen {
             font.draw(batch, "addTime collected!", 20, 80);
         }
 
+        if (decreaseTimeCollected) {
+            font.draw(batch, "decreaseTime collected!", 20, 100);
+        }
+
         batch.end();
     }
 
@@ -275,6 +286,12 @@ public class map1Maze implements Screen {
         System.out.println("adding " + extraTime + " seconds");
         timeLeft += extraTime;
     }
+
+    public void decreaseTime(float extraTime) {
+        System.out.println("removing " + extraTime + " seconds");
+        timeLeft -= extraTime;
+    }
+
 
     public void handleInput() {
 
@@ -359,6 +376,13 @@ public class map1Maze implements Screen {
             System.out.println("addtime collected! +5 seconds");
             addTime(5f);
             addTimeCollected = true;
+        }
+
+        if (!decreaseTimeCollected && decreaseTimeArea != null && decreaseTimeArea.contains(playerPosition)) {
+            System.out.println("decreaseTime collected! +5 seconds");
+            decreaseTime(5f);
+            decreaseTimeCollected = true;
+
         }
     }
     @Override public void hide() { }
