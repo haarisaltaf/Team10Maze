@@ -34,6 +34,7 @@ SGQ_ui/inputs/gamepad.png
 SGQ_ui/inputs/keyboard.png
 libgdx.png
 maps/Team10Maze1.tmx
+maps/Team10Maze2.tmx
 maps/groundtileset.tsx
 maps/walls.tsx
 ui/font-list.fnt
