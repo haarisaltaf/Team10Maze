@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch; // how gdx draws 2d images eff
 // stage, ui elements etc
 import com.badlogic.gdx.scenes.scene2d.ui.Button; // import button
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -27,6 +29,7 @@ public class mainMenu implements Screen {
     private Texture dungeonGroundsTexture;
     private TextureRegion menuBackground; // image object
     private float[] lengthxy;
+    private FitViewport viewport;
     private Stage stage;
     // TODO: change to TextureRegion[][] ... = TextureRegion.split() to auto split the entire image evenly into tiles - sort out once more than just the background is needed
 
@@ -40,7 +43,7 @@ public class mainMenu implements Screen {
     @Override
     public void show() {
         // ------ Implementing skin and stage ------
-        stage = new Stage();
+        stage = new Stage(new FitViewport(640, 480));
         Gdx.input.setInputProcessor(stage);
         Skin buttonSkin = new Skin(Gdx.files.internal("uiskin.json"));
 
@@ -53,7 +56,6 @@ public class mainMenu implements Screen {
         transparentStyle.down = null;
         transparentStyle.over = null;
         transparentStyle.font = buttonSkin.getFont("default-font"); // TODO:  5 implement nicer font
-
         TextButton playButton = new TextButton("Play", transparentStyle);
         playButton.setSize(75, 75);
         playButton.setPosition(162, 83);
@@ -104,7 +106,9 @@ public class mainMenu implements Screen {
 
     // Unused implemented methods for now
     @Override public void hide() { }
-    @Override public void resize(int width, int height) {} // TODO: 1 change button size to change with resizing -- getBackgroundSize()
+    @Override public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
+    } // TODO: 1 change button size to change with resizing -- getBackgroundSize()
     @Override public void pause() {}
     @Override public void resume() {}
 
