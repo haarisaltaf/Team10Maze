@@ -60,6 +60,10 @@ public class map1Maze implements Screen {
     private TextureRegion playerSprite;
     private Texture playerTexture;
 
+    // Chaser
+    private Chaser chaser;
+    private Vector2 chaserPosition;
+
     // Special locations
     private Rectangle goalArea;
     private Rectangle addTimeArea;
@@ -87,13 +91,15 @@ public class map1Maze implements Screen {
         font = new BitmapFont();
         // font.getData.setScale(2f);
 
-        loadTiledMap();
+        loadTiledMap(); // specials are handled here
 
         cameraMap1 = new OrthographicCamera();
         // y-axis increasing towards top of screen, shows 18x18
         cameraMap1.setToOrtho(false, 18, 18);
 
         loadPlayerSprite();
+
+        chaser = new Chaser()
 
         updateCamera();
     }
@@ -394,13 +400,19 @@ public class map1Maze implements Screen {
 
 
 // OVERALL TODOS:
-//      cleanup assets -- Map cleanup and sprite cleanup
-//      add VISIBLE GOAL AND POWERUP ON THE MAP
+//      cleanup assets -- Map cleanup and sprite cleanup //      add VISIBLE GOAL AND POWERUP ON THE MAP
 //      ADD CHASER
-//      ADD DEBUFF -- look at addTime function and change a lil
 //      add more powerups -- look at addTime and change a bit
 
     //      WHO CARES:
     //      Pause menu
     //      clear screen upon reaching goal properyl so no glitchy background
     //      HAVE IT WORK WHEN FULL SCREENED
+
+//
+//
+// DONE:::
+//      ADD DEBUFF -- look at addTime function and change a lil
+//
+//
+//
