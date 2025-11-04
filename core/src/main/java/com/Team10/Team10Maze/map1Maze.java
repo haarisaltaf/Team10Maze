@@ -39,6 +39,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 // player
 import com.badlogic.gdx.math.Vector2;
 
+// Text
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.Color;
+
 public class map1Maze implements Screen {
     // main inits
     private final mazeGame game;
@@ -75,9 +79,10 @@ public class map1Maze implements Screen {
     private OrthographicCamera cameraMap1;
 
     // Game state
-    private float timeLeft = 60f;
+    private float timeLeft = 3f;
     private int tileSize = 32;
     private boolean gameEnding = false; // flag to prevent crash when getting goal
+    private boolean gamePaused = false;
     // checks if gameending == True then goes to main menu as finished
 
 
@@ -214,6 +219,7 @@ public class map1Maze implements Screen {
 
 
     @Override public void dispose() {
+        System.out.println("Here");
         font.dispose();
         batch.dispose();
         tiledMap1.dispose();
@@ -224,7 +230,11 @@ public class map1Maze implements Screen {
     @Override
     public void render(float delta) {
         // if gameEnding == true then endMap() has already been called so can just return;
+        
         if (gameEnding) {
+            // Clear the screen before transitioning to prevent showing map in background
+            Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             return;
         }
 
@@ -232,7 +242,10 @@ public class map1Maze implements Screen {
         handleInput();
 
         // updating timer
-        timeLeft -= delta;
+
+        if (!gamePaused) {
+            timeLeft -= delta;
+        }
 
         cameraMap1.update();
 
@@ -253,10 +266,12 @@ public class map1Maze implements Screen {
         renderUI();
 
         // exit to mainmenu if run out of time
-        if (timeLeft <= 0f) {
-            System.out.println("Time's up! Game Over");
-            endMap(); // method to move back to main menu
-            return;
+        if (!gamePaused) {
+            if (timeLeft <= 0f) {
+                System.out.println("Time's up! Game Over");
+                endMap(); // method to move back to main menu
+                return;
+            }
         }
 
     }
@@ -267,22 +282,44 @@ public class map1Maze implements Screen {
         batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.begin();
 
-        // adding timer
-        String timerText = "Timer: " + Math.max(0, (int)timeLeft) + "s";
 
-        // draw timer
-        font.draw(batch, timerText, 20, 60);
+        if (!gamePaused) {
+            // adding timer
+            font.getData().setScale(1f);
+            String timerText = "Timer: " + Math.max(0, (int)timeLeft) + "s";
 
-        // show on-screen controls
-        font.draw(batch, "WASD to move", 20, 40);
+            // draw timer
+            font.draw(batch, timerText, 20, 60);
 
-        // showing if addTime has been collected
-        if (addTimeCollected) {
-            font.draw(batch, "addTime collected!", 20, 80);
-        }
+            // show on-screen controls
+            font.draw(batch, "WASD to move", 20, 40);
 
-        if (decreaseTimeCollected) {
-            font.draw(batch, "decreaseTime collected!", 20, 100);
+            // showing if addTime has been collected
+            if (addTimeCollected) {
+                font.draw(batch, "addTime collected!", 20, 80);
+            }
+
+            if (decreaseTimeCollected) {
+                font.draw(batch, "decreaseTime collected!", 20, 100);
+            }
+        } else {
+            font.getData().setScale(3f);
+
+            String pauseText = "GAME PAUSED!\nTime remaining: " + Math.max(0, (int)timeLeft) + "s\nPress ESC to continue";
+
+            GlyphLayout layout = new GlyphLayout(font, pauseText);
+
+            float screenW = Gdx.graphics.getWidth();
+            float screenH = Gdx.graphics.getHeight();
+            float x = (screenW / 2f) - (layout.width / 2f);
+            float y = (screenH / 1.3f) + (layout.height / 1.3f);
+            font.setColor(Color.BLACK);
+            font.draw(batch, layout, x + 2, y);
+            font.draw(batch, layout, x - 2, y);
+            font.draw(batch, layout, x, y + 2);
+            font.draw(batch, layout, x, y - 2);
+            font.setColor(Color.WHITE);
+            font.draw(batch, layout, x, y);
         }
 
         batch.end();
@@ -301,20 +338,28 @@ public class map1Maze implements Screen {
 
     public void handleInput() {
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-            moveCharacter(0, 1);
+
+        if (!gamePaused) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+                moveCharacter(0, 1);
+            }
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+                moveCharacter(-1, 0);
+            }
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+                moveCharacter(0, -1);
+            }
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+                moveCharacter(1, 0);
+            }
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-            moveCharacter(-1, 0);
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-            moveCharacter(0, -1);
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-            moveCharacter(1, 0);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            gamePaused = !gamePaused;
+            System.out.println(gamePaused);
         }
     }
 

@@ -84,6 +84,10 @@ public class mainMenu implements Screen {
 
     @Override
     public void render(float delta) {
+        // Clear the screen to prevent previous screen from showing through
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        
         // ------ drawing background ------
         batch.begin();
         // batch.draw(background, x, y, smallest dimenstion, smallest dimenstion)
