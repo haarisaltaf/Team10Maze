@@ -38,28 +38,24 @@ public class mainMenu implements Screen {
         // passes through the superclass's (main Game) "this" instance
         this.game = game;
 
+        viewport = new FitViewport(640, 480); 
+        batch = new SpriteBatch();
     }
 
     @Override
     public void show() {
         // implementing skin and stage
-         stage = new Stage(new FitViewport(640, 480));
+        stage = new Stage(new FitViewport(640, 480));
         Gdx.input.setInputProcessor(stage);
         Skin buttonSkin = new Skin(Gdx.files.internal("uiskin.json"));
 
 
         // implementing button and click listener
         TextButton.TextButtonStyle transparentStyle = new TextButton.TextButtonStyle();
+        transparentStyle.font = buttonSkin.getFont("default-font");
 
-        // setting transparent and font
-        transparentStyle.up = null;
-        transparentStyle.down = null;
-        transparentStyle.over = null;
-        transparentStyle.font = buttonSkin.getFont("default-font"); // TODO:  implement nicer font
-        TextButton playButton = new TextButton("Play", transparentStyle);
-        playButton.setSize(75, 75);
-        playButton.setPosition(162, 83);
-
+        playButton = new TextButton("Play", transparentStyle);
+        playButton.setSize(120, 60);
         stage.addActor(playButton);
 
         playButton.addListener(new ClickListener() {
@@ -77,60 +73,48 @@ public class mainMenu implements Screen {
         batch = new SpriteBatch(); // new creating batch image
 
         dungeonGroundsTexture = new Texture("SGQ_Dungeon/grounds_and_walls/grounds.png");
-        menuBackground = new TextureRegion(dungeonGroundsTexture, 64, 192, 64, 64); // at (64, 192) on ground.png take a region of 64x64
-        lengthxy = getBackgroundSize();
+        menuBackground = new TextureRegion(dungeonGroundsTexture, 64, 192, 64, 64);
+
+        updateLayout(); // Position button based on current screen size
     }
 
+    private void updateLayout() {
+        float worldWidth = viewport.getWorldWidth();
+        float worldHeight = viewport.getWorldHeight();
+
+        // Resizes the play button whenever width/height changes
+        playButton.setPosition(
+                worldWidth / 4f - playButton.getWidth() / 2f,
+                worldHeight / 4f - playButton.getHeight() / 2f
+        );
+    }
 
     @Override
     public void render(float delta) {
-        // Clear the screen to prevent previous screen from showing through
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        ScreenUtils.clear(0, 0, 0, 1);
 
-        // drawing background
+        batch.setProjectionMatrix(viewport.getCamera().combined);
         batch.begin();
-        // batch.draw(background, x, y, smallest dimenstion, smallest dimenstion)
-        batch.draw(menuBackground, lengthxy[1], lengthxy[2], lengthxy[0], lengthxy[0]);
+        batch.draw(menuBackground, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
         batch.end();
 
-        // drawing stage
-        stage.act(Gdx.graphics.getDeltaTime());
+        stage.act(delta);
         stage.draw();
     }
 
-
     @Override
-    public void dispose() {
+    public void resize(int width, int height) {
+        viewport.update(width, height, true);
+        updateLayout();   // Re-center UI + background on resize
+    }
+
+    @Override public void dispose() {
         batch.dispose();
         stage.dispose();
         dungeonGroundsTexture.dispose();
     }
 
-
-    // Unused implemented methods for now
-    @Override public void hide() { }
-    @Override public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
-    }
+    @Override public void hide() {}
     @Override public void pause() {}
     @Override public void resume() {}
-
-    public float[] getBackgroundSize() {
-
-        // get screensize
-        int screenWidth = Gdx.graphics.getWidth();
-        int screenHeight = Gdx.graphics.getHeight();
-
-        // calc max-length to strech without overscanning, use smallest dimension:
-        float length = Math.min(screenWidth, screenHeight);
-        float x = (screenWidth - length) / 2f;
-        float y = (screenHeight - length) / 2f;
-
-        // return as an array of floats
-        float[] returnValue = {length, x, y};
-        return returnValue;
-    }
-
-
 }
