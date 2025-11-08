@@ -79,7 +79,7 @@ public class map1Maze implements Screen {
     private OrthographicCamera cameraMap1;
 
     // Game state
-    private float timeLeft = 3f;
+    private float timeLeft = 60f;
     private int tileSize = 32;
     private boolean gameEnding = false; // flag to prevent crash when getting goal
     private boolean gamePaused = false;
@@ -104,7 +104,7 @@ public class map1Maze implements Screen {
 
         loadPlayerSprite();
 
-        chaser = new Chaser()
+        chaser = new Chaser(chaserPosition.x, chaserPosition.y, wallsLayer);
 
         updateCamera();
     }
@@ -210,6 +210,11 @@ public class map1Maze implements Screen {
                 case "decrease_time" :
                     decreaseTimeArea = new Rectangle(tileX, tileY, 2, 2);
                     System.out.println("Found decreaseTimeArea at: (" + tileX + ", " + tileY + ")");
+                    break;
+
+                case "chaser_spawn" :
+                    chaserPosition = new Vector2(tileX, tileY);
+                    System.out.println("Found chaserPosition at: (" + tileX + ", " + tileY + ")");
             }
             // remember to add to checkSpecialTileCollision() to handle when playerPosition overlaps
         }
@@ -219,18 +224,18 @@ public class map1Maze implements Screen {
 
 
     @Override public void dispose() {
-        System.out.println("Here");
         font.dispose();
         batch.dispose();
         tiledMap1.dispose();
         mapRenderer.dispose();
+        chaser.dispose();
         playerTexture.dispose();
     }
 
     @Override
     public void render(float delta) {
         // if gameEnding == true then endMap() has already been called so can just return;
-        
+
         if (gameEnding) {
             // Clear the screen before transitioning to prevent showing map in background
             Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
@@ -255,11 +260,24 @@ public class map1Maze implements Screen {
         mapRenderer.setView(cameraMap1);
         mapRenderer.render();
 
+        // chaser movement update then check if collision
+        chaser.update(delta, playerPosition);
+
+        // epsilon equals function fuzzy compares 2 vectors
+        if (chaser.getPosition().epsilonEquals(playerPosition, 0.5f)){
+            System.out.println("CAUGHT BY CHASER"); // TODO: HAVE TTHIS BE A GAMEOVER SCREEN
+            endMap();
+            return;
+        }
+
+
         // drawing sprite using camera location
         batch.setProjectionMatrix(cameraMap1.combined);
         batch.begin();
+
         // sprite has size of 1x1
         batch.draw(playerSprite, playerPosition.x, playerPosition.y, 1f, 1f);
+        chaser.render(batch);
         batch.end();
 
         // rendering on-screen ui

@@ -95,7 +95,7 @@
     <property name="type" value="decrease_time"/>
    </properties>
   </object>
-  <object id="7" name="chaser_spawn" x="672" y="96" width="62.6825" height="63.8042">
+  <object id="7" name="chaser_spawn" x="672" y="96" width="33" height="33">
    <properties>
     <property name="type" value="chaser_spawn"/>
    </properties>
