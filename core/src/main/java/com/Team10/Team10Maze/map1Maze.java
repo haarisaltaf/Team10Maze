@@ -152,7 +152,7 @@ public class map1Maze implements Screen {
         // epsilon equals function fuzzy compares 2 vectors
         if (chaser.getPosition().epsilonEquals(player.getPosition(), 0.5f)){
             System.out.println("CAUGHT BY CHASER"); // TODO: HAVE TTHIS BE A GAMEOVER SCREEN
-            endMap();
+            endMap(false);
             return;
         }
 
@@ -170,7 +170,7 @@ public class map1Maze implements Screen {
         if (!gamePaused) {
             if (gameTimer.isTimeUp()) {
                 System.out.println("Time's up! Game Over");
-                endMap(); // method to move back to main menu
+                endMap(false); // method to move back to main menu
                 return;
             }
         }
@@ -261,10 +261,10 @@ public class map1Maze implements Screen {
     public void goalReached() {
         // TODO: add congratulations scene
         System.out.println("CONGRATULTATIOANS");
-        endMap();
+        endMap(true);
     }
 
-    private void endMap() {
+    private void endMap(boolean gameWon) {
         gameEnding = true;
         // setting new runnable stops crashing when reaching end goal
         // queues transition to mainMenu for NEXT frame so doesnt crash
@@ -272,7 +272,7 @@ public class map1Maze implements Screen {
         Gdx.app.postRunnable(new Runnable() {
             @Override
             public void run() {
-                game.setScreen(new mainMenu(game));
+                game.setScreen(new gameOver(game, gameWon));
                 dispose();
             }
         });

@@ -31,6 +31,7 @@ public class mainMenu implements Screen {
     private float[] lengthxy;
     private FitViewport viewport;
     private Stage stage;
+    private TextButton playButton;
     // TODO: change to TextureRegion[][] ... = TextureRegion.split() to auto split the entire image evenly into tiles - sort out once more than just the background is needed
 
 
