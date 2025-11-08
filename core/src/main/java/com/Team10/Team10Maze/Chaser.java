@@ -18,7 +18,7 @@ public class Chaser {
 
     private float moveTimer = 0f; // tracking time moving to limit how often to move
     private static final float MOVE_INTERVAL = 0.5f; // moves every half second
-    private static final float CHASE_RANGE = 7f; // when within 5 tiles starts chasing
+    private static final float CHASE_RANGE = 10f; // when within 10 tiles starts chasing directly
     private Random random = new Random();
 
 

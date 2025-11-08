@@ -1,15 +1,15 @@
 package com.Team10.Team10Maze;
 
 
-// Drawing and texture imports
+// drawing and texture imports
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20; // controls openGL drawing
 import com.badlogic.gdx.graphics.Texture; // image object class -- draws .jpeg/ .png
-import com.badlogic.gdx.graphics.g2d.TextureRegion; // Allows for subsection of a jpeg to be taken
+import com.badlogic.gdx.graphics.g2d.TextureRegion; // allows for subsection of a jpeg to be taken
 import com.badlogic.gdx.graphics.g2d.SpriteBatch; // how gdx draws 2d images efficently
 
 // stage, ui elements etc
-import com.badlogic.gdx.scenes.scene2d.ui.Button; // import button
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -42,20 +42,20 @@ public class mainMenu implements Screen {
 
     @Override
     public void show() {
-        // ------ Implementing skin and stage ------
-        stage = new Stage(new FitViewport(640, 480));
+        // implementing skin and stage
+         stage = new Stage(new FitViewport(640, 480));
         Gdx.input.setInputProcessor(stage);
         Skin buttonSkin = new Skin(Gdx.files.internal("uiskin.json"));
 
 
-        // ------ Implementing button and click listener -----
+        // implementing button and click listener
         TextButton.TextButtonStyle transparentStyle = new TextButton.TextButtonStyle();
 
         // setting transparent and font
         transparentStyle.up = null;
         transparentStyle.down = null;
         transparentStyle.over = null;
-        transparentStyle.font = buttonSkin.getFont("default-font"); // TODO:  5 implement nicer font
+        transparentStyle.font = buttonSkin.getFont("default-font"); // TODO:  implement nicer font
         TextButton playButton = new TextButton("Play", transparentStyle);
         playButton.setSize(75, 75);
         playButton.setPosition(162, 83);
@@ -73,7 +73,7 @@ public class mainMenu implements Screen {
 
         });
 
-        // ------ Background -------
+        // background
         batch = new SpriteBatch(); // new creating batch image
 
         dungeonGroundsTexture = new Texture("SGQ_Dungeon/grounds_and_walls/grounds.png");
@@ -87,14 +87,14 @@ public class mainMenu implements Screen {
         // Clear the screen to prevent previous screen from showing through
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        
-        // ------ drawing background ------
+
+        // drawing background
         batch.begin();
         // batch.draw(background, x, y, smallest dimenstion, smallest dimenstion)
         batch.draw(menuBackground, lengthxy[1], lengthxy[2], lengthxy[0], lengthxy[0]);
         batch.end();
 
-        // ------ drawing stage ------
+        // drawing stage
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
@@ -112,7 +112,7 @@ public class mainMenu implements Screen {
     @Override public void hide() { }
     @Override public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
-    } // TODO: 1 change button size to change with resizing -- getBackgroundSize()
+    }
     @Override public void pause() {}
     @Override public void resume() {}
 
@@ -128,7 +128,6 @@ public class mainMenu implements Screen {
         float y = (screenHeight - length) / 2f;
 
         // return as an array of floats
-        // TODO: 3 change to an enum class to be more obvious so backgroundSize.length, .x , etc.
         float[] returnValue = {length, x, y};
         return returnValue;
     }
