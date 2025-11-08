@@ -463,19 +463,6 @@ public class map1Maze implements Screen {
 
 
 // OVERALL TODOS:
-//      cleanup assets -- Map cleanup and sprite cleanup //      add VISIBLE GOAL AND POWERUP ON THE MAP
-//      ADD CHASER
+//      cleanup assets -- Map cleanup and sprite cleanup
+//      add VISIBLE GOAL AND POWERUP ON THE MAP
 //      add more powerups -- look at addTime and change a bit
-
-    //      WHO CARES:
-    //      Pause menu
-    //      clear screen upon reaching goal properyl so no glitchy background
-    //      HAVE IT WORK WHEN FULL SCREENED
-
-//
-//
-// DONE:::
-//      ADD DEBUFF -- look at addTime function and change a lil
-//
-//
-//
