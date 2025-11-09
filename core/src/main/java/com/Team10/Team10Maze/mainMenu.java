@@ -3,16 +3,13 @@ package com.Team10.Team10Maze;
 
 // drawing and texture imports
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20; // controls openGL drawing
 import com.badlogic.gdx.graphics.Texture; // image object class -- draws .jpeg/ .png
 import com.badlogic.gdx.graphics.g2d.TextureRegion; // allows for subsection of a jpeg to be taken
 import com.badlogic.gdx.graphics.g2d.SpriteBatch; // how gdx draws 2d images efficently
 
 // stage, ui elements etc
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -28,13 +25,17 @@ public class mainMenu implements Screen {
     private SpriteBatch batch; // new drawing object
     private Texture dungeonGroundsTexture;
     private TextureRegion menuBackground; // image object
-    private float[] lengthxy;
     private FitViewport viewport;
     private Stage stage;
     private TextButton playButton;
     // TODO: change to TextureRegion[][] ... = TextureRegion.split() to auto split the entire image evenly into tiles - sort out once more than just the background is needed
 
 
+    /**
+     * Initalises the variables needed to render the main menu
+     * 
+     * @param game The game instance that allows us to change the screen
+     */
     public mainMenu(mazeGame game) {
         // passes through the superclass's (main Game) "this" instance
         this.game = game;
@@ -43,6 +44,16 @@ public class mainMenu implements Screen {
         batch = new SpriteBatch();
     }
 
+    /**
+     * Creates the main menu
+     * 
+     * <p>
+     * This function is responsible for:
+     * <ul>
+     *  <li>Creating the background texture</li>
+     *  <li>Creating the play button (with a ClickListener) and setting information regarding it</li>
+     * <ul>
+     */
     @Override
     public void show() {
         // implementing skin and stage
@@ -79,6 +90,9 @@ public class mainMenu implements Screen {
         updateLayout(); // Position button based on current screen size
     }
 
+    /**
+     * Used to reposition the button based on width and height changes
+     */
     private void updateLayout() {
         float worldWidth = viewport.getWorldWidth();
         float worldHeight = viewport.getWorldHeight();
@@ -90,6 +104,11 @@ public class mainMenu implements Screen {
         );
     }
 
+    /**
+     * Renders the previously setup buttons, background, and textures
+     * 
+     * @param delta Time passed in seconds since the last frame was rendered
+     */
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
@@ -103,12 +122,21 @@ public class mainMenu implements Screen {
         stage.draw();
     }
 
+    /**
+     * Called when application window height/width is changed to update the viewport and UI/Background
+     * 
+     * @param width The new width of the application window
+     * @param height The new height of the application window
+     */
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height, true);
         updateLayout();   // Re-center UI + background on resize
     }
 
+    /**
+     * Disposes of all previously setup texts, buttons, cameras, and textures
+     */
     @Override public void dispose() {
         batch.dispose();
         stage.dispose();

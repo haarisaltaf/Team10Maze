@@ -20,7 +20,6 @@ public class MapManager {
     private OrthogonalTiledMapRenderer mapRenderer;
     private TiledMapTileLayer wallsLayer;
     private TiledMapTileLayer groundLayer;
-    private MapLayer specialsLayer;
     private int tileSize = 32;
 
     // Special locations that will be found
@@ -54,7 +53,7 @@ public class MapManager {
         MapObjects specials = specialsLayer.getObjects();
 
         // check the type property (goal, add_time, player_spawn)
-        for (MapObject special : specialsLayer.getObjects()) {
+        for (MapObject special : specials) {
             // in the map we have only set the rectangle to have type
             // property so can easily skip non-rectangles
             if (!(special instanceof RectangleMapObject)) continue;

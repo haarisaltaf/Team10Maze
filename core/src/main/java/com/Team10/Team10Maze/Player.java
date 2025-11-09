@@ -14,12 +14,21 @@ public class Player {
     private Texture playerTexture;
     private TiledMapTileLayer wallsLayer;
 
+    /**
+     * Initalises the player at the provided coordinates
+     * 
+     * @param startPosition The coordinates to spawn the player sprite at
+     * @param wallsLayer The wall layer on the map used for collision checks later
+     */
     public Player(Vector2 startPosition, TiledMapTileLayer wallsLayer) {
         this.playerPosition = startPosition;
         this.wallsLayer = wallsLayer;
         loadPlayerSprite();
     }
 
+    /**
+     * Loads the player texture
+     */
     private void loadPlayerSprite() {
         playerTexture = new Texture("SGQ_Dungeon/characters/main/elf.png");
         // TODO: change sprite to face correct direction of movement
@@ -27,10 +36,20 @@ public class Player {
         System.out.println("Player sprite loaded from tileset");
     }
 
+    /**
+     * Returns the player position
+     * @return Player position as a Vector2
+     */
     public Vector2 getPosition() {
         return playerPosition;
     }
 
+    /**
+     * Moves player to new coordinates calculated from xDifference and yDifference if all collision checks pass
+     * 
+     * @param xDifference The difference in X coordinates from the player's existing coordinates 
+     * @param yDifference The difference in Y coordinates from the player's existing coordinates
+     */
     public void moveCharacter(int xDifference, int yDifference) {
         // grab new location
         float newX = playerPosition.x + xDifference;
@@ -55,11 +74,19 @@ public class Player {
         System.out.println("player moved to: " + playerPosition);
     }
 
+    /**
+     * Renders the player sprite
+     * 
+     * @param batch Rendering tool to render the players sprite
+     */
     public void render(SpriteBatch batch) {
         // sprite has size of 1x1
         batch.draw(playerSprite, playerPosition.x, playerPosition.y, 1f, 1f);
     }
 
+    /**
+     * Disposes of the player texture
+     */
     public void dispose() {
         playerTexture.dispose();
     }

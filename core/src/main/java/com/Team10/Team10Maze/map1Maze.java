@@ -6,27 +6,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20; // controls openGL drawing
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 
 // input handling
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.Input;
 
-// Application and Window class imports
-import com.badlogic.gdx.utils.ScreenUtils; // useful library for screen tasks eg clearing screen
-
-// Algorithm-based/ datatype imports
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.lang.StringBuilder;
-
-// tiled map
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-
-// player
-import com.badlogic.gdx.math.Vector2;
 
 // text
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -37,7 +21,6 @@ public class map1Maze implements Screen {
     private final mazeGame game;
     private SpriteBatch batch;
     private BitmapFont font;
-    private Stage stage;
 
     // adding other class files
     private MapManager mapManager;
@@ -54,10 +37,20 @@ public class map1Maze implements Screen {
     private boolean gamePaused = false;
 
     // checks if gameending == True then goes to main menu as finished
+    
+    /**
+     * Initalises the first map of the maze
+     * 
+     * @param game The game instance that allows us to change the screen
+     */
     public map1Maze(mazeGame game) {
         this.game = game;
     }
 
+
+    /**
+     * Initalises the camera, timer, map tiles and chaser
+     */
     @Override public void show() {
         // init rendering
         batch = new SpriteBatch();
@@ -92,6 +85,9 @@ public class map1Maze implements Screen {
         updateCamera();
     }
 
+    /**
+     * Updates the camera position ensuring it doesn't show any out of bounds area
+     */
     private void updateCamera() {
         //setting camera to follow playerPosition + half a coord, overhead of 0 as orthographic camera so depth dont matter
         cameraMap1.position.set(player.getPosition().x + 0.5f, player.getPosition().y + 0.5f, 0);
@@ -116,6 +112,9 @@ public class map1Maze implements Screen {
         cameraMap1.update();
     }
 
+    /**
+     * Disposes of all previously used cameras, text, textures, chasers and anything map related
+     */
     @Override public void dispose() {
         font.dispose();
         batch.dispose();
@@ -124,6 +123,20 @@ public class map1Maze implements Screen {
         player.dispose();
     }
 
+
+    /**
+     * Renders the map. This method is also responsible for
+     * <ul>
+     *  <li>Handling player input</li>
+     *  <li>Updating the timer value</li>
+     *  <li>Updating the chaser's position</li>
+     *  <li>Detecting chaser -> player collisions</li>
+     *  <li>Detecting game ending conditions</li>
+     *  <li>Rendering the UI</li>
+     * </ul>
+     * 
+     * @param delta Time passed in seconds since the last frame was rendered
+     */
     @Override
     public void render(float delta) {
         // if gameEnding == true then endMap() SHOULD have already been called so can just return;
@@ -176,6 +189,13 @@ public class map1Maze implements Screen {
         }
     }
 
+    /**
+     * Renders the game UI. It does all these to do that:
+     * <ul>
+     *  <li>Shows text related to the game</li>
+     *  <li>Shows specific text to a player if they are paused</li>
+     * </ul>
+     */
     private void renderUI() {
         // setting as a projection to the view itself so doesnt move with camera movement
         batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -225,6 +245,14 @@ public class map1Maze implements Screen {
         batch.end();
     }
 
+    /**
+     * Handles player input
+     * 
+     * <ul>
+     *  <li>Uses user input to move the player</li>
+     *  <li>Uses user input to pause/resume the game</li>
+     * </ul>
+     */
     public void handleInput() {
         if (!gamePaused) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
@@ -258,17 +286,21 @@ public class map1Maze implements Screen {
         }
     }
 
+    /**
+     * Called when player reaches the end coordinates of the map
+     */
     public void goalReached() {
-        // TODO: add congratulations scene
         System.out.println("CONGRATULTATIOANS");
         endMap(true);
     }
 
+    /**
+     * Sets the user to the game over screen
+     * 
+     * @param gameWon True if the player won the game, false if they lost
+     */
     private void endMap(boolean gameWon) {
         gameEnding = true;
-        // setting new runnable stops crashing when reaching end goal
-        // queues transition to mainMenu for NEXT frame so doesnt crash
-        // when trying to load new screen on same frame
         Gdx.app.postRunnable(new Runnable() {
             @Override
             public void run() {
@@ -278,6 +310,15 @@ public class map1Maze implements Screen {
         });
     }
 
+    /**
+     * Checks for different types of collisions
+     * 
+     * <ul>
+     *  <li>If the player reached the end coordinates</li>
+     *  <li>If the player reached the buff (adds 5seconds of time)</li>
+     *  <li>If the player reached the debuff (removes 5 seconds of time)</li>
+     * </ul>
+     */
     private void checkSpecialTileCollision() {
         // Check goal first - end game
         if (specialTiles.isGoalReached(player.getPosition())) {
@@ -308,8 +349,6 @@ public class map1Maze implements Screen {
     // debuff: deen, buff: add_time, invisible: debuff --- MAKE THESE UNI_BASED
     // a tracker of the time the game lasts (up to 5 real-world minutes), -- DONE
     // a simple counter denoting how many of each event have been interacted with. -- DONE
-    // TODO: ===== NEED TO ADD JAVADOC AND PRETTY ASSETS THIS IS THE MAIN THINGS LEFT
-    // TODO: ADD CONGRATS AND YOU LOSE SCREEN AND SCORING/ LEADERBOARD
     //
     //
     // cleanup assets -- Map cleanup and sprite cleanup

@@ -22,9 +22,13 @@ public class Chaser {
     private Random random = new Random();
 
 
-    // passing through the walls layer as this stays constant and would
-    // allow for us to grab width/ height of map and walls themselves
-    // so can figure out where OOB and walls are to stop movement in that direction
+    /**
+     * Initalises the chaser
+     * 
+     * @param x Starting x coordinate of the chaser
+     * @param y Starting y coordinate of the chaser
+     * @param wallsLayer The wall layer on the map to ensure the chaser doesn't run into the wall
+     */
     public Chaser(float x, float y, TiledMapTileLayer wallsLayer) {
         this.position = new Vector2(x, y);
         this.walls = wallsLayer;
@@ -32,6 +36,12 @@ public class Chaser {
     }
 
 
+    /**
+     * Moves chaser if the required time before new movements has been passed
+     * 
+     * @param delta Internal timer of LibGDX. Used to determine when the chaser should move
+     * @param playerPosition Vector of the player's position
+     */
     public void update(float delta, Vector2 playerPosition) {
         // need to pass-through player's current position
         moveTimer += delta;
@@ -51,15 +61,27 @@ public class Chaser {
         }
     }
 
+    /**
+     * Loads the sprite used for the chaser
+     */
     private void loadSprite() {
         texture = new Texture("SGQ_Dungeon/characters/enemies/rat.png");
         sprite = new TextureRegion(texture, 0, 0, 16, 16);
     }
 
+    /**
+     * Returns the chaser's current position as a Vector2
+     * 
+     * @return Chaser's position
+     */
+
     public Vector2 getPosition() {
         return position;
     }
 
+    /**
+     * Determines a random direction for the chaser to move in. 
+     */
     private void randomMovement() {
         int nextDirection = random.nextInt(4);
 
@@ -86,6 +108,11 @@ public class Chaser {
         attemptMove(dx, dy);
     }
 
+    /**
+     * Moves chaser towards the player based on their coordinates
+     * 
+     * @param playerPosition Vector of the player's position
+     */
     private void chasePlayer(Vector2 playerPosition) {
         float dx = playerPosition.x - position.x;
         float dy = playerPosition.y - position.y;
@@ -99,6 +126,14 @@ public class Chaser {
         }
     }
 
+
+    /**
+     * 
+     * Attempts to move the chaser to a coordinate determined by the difference in the provided X and Y coordinate
+     * 
+     * @param dx Attempted difference in the X coordinate
+     * @param dy Attempted difference in the Y coordinate
+     */
     private void attemptMove(int dx, int dy) {
         float newX = position.x + dx;
         float newY = position.y + dy;
@@ -122,10 +157,18 @@ public class Chaser {
         }
     }
 
+    /**
+     * 
+     * @param batch Rendering tool to render the Chaser's sprite
+     */
     public void render(SpriteBatch batch) {
         batch.draw(sprite, position.x, position.y, 1f, 1f);
     }
 
+
+    /**
+     * Disposes of the Chaser's texture
+     */
     public void dispose() {
         texture.dispose();
     }

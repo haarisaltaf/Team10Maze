@@ -23,11 +23,27 @@ public class gameOver implements Screen {
     private Stage stage;
     private Viewport viewport;
 
+    /**
+     * Called when a game is determined as over
+     * 
+     * @param game The game instance that allows us to change the screen
+     * @param gameWon True if the player won the game, false if they lost
+     */
     public gameOver(mazeGame game, boolean gameWon) {
         this.game = game;
         this.gameWon = gameWon;
     }
 
+
+    /**
+     * Creates the menu the user will see.
+     * <p>
+     * This function is responsible for:
+     * <ul>
+     *  <li>Creating text and updating all relevant data for them</li>
+     *  <li>Creates a key handler to move player to main menu</li>
+     * </ul>
+     */
     @Override
     public void show() {
         viewport = new FitViewport(640, 480);
@@ -78,12 +94,18 @@ public class gameOver implements Screen {
         }, 3);
     }
 
+    /**
+     * Returns the player back to the main menu once a key has been pressed in this screen
+     */
     private void goToMainMenu() {
         System.out.println("Game Over screen closed - moving to next screen.");
         game.setScreen(new mainMenu(game));
         dispose();
     }
 
+    /** 
+     * @param delta Internal timer of LibGDX to ensure everything is running smooth irregardless of FPS
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -93,11 +115,18 @@ public class gameOver implements Screen {
         stage.draw();
     }
 
+    /** 
+     * @param width New width of the user's window
+     * @param height New height of the user's window
+     */
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height, true);
     }
 
+    /**
+     * Called to dispose of all text and key handlers used in this screen
+     */
     @Override public void dispose() {
         stage.dispose();
     }
