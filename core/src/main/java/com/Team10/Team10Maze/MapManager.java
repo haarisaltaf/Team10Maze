@@ -84,7 +84,6 @@ public class MapManager {
 
             // switch case to check if player_spawn/ goal/ add_time
             // stores location of each to then check if overlap ever occurs
-            System.out.println("checking type");
             switch (type) {
                 case "player_spawn" :
                     playerSpawnPosition = new Vector2(tileX, tileY);

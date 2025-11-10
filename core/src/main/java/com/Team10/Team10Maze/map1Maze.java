@@ -291,7 +291,6 @@ public class map1Maze implements Screen {
      * Called when player reaches the end coordinates of the map
      */
     public void goalReached() {
-        System.out.println("CONGRATULTATIOANS");
         endMap(true);
     }
 

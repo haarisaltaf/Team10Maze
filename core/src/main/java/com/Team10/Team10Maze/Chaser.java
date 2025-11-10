@@ -56,8 +56,6 @@ public class Chaser {
             } else {
                 randomMovement();
             }
-
-            System.out.println("Chaser moved again, 0.5sec till next");
         }
     }
 
@@ -142,18 +140,16 @@ public class Chaser {
         // check if out of bounds
         if ( (newX < 0 || newX >= this.walls.getWidth()) ||
              (newY < 0 || newY >= this.walls.getHeight()) ) {
-            System.out.println("chaser movement blocked - out of bounds");
             return;
         }
 
         // Check collision with walls layer
         else if (wallCell != null && wallCell.getTile() != null) {
-            System.out.println("chaser movement blocked - wall");
+            return;
         }
 
         else {
             position.set(newX, newY);
-            System.out.println("chaser moved to: " + position);
         }
     }
 

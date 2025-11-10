@@ -56,6 +56,7 @@ public class Player {
         float newY = playerPosition.y + yDifference;
 
         // check map bounds -- return if at edge
+
         if ((newX < 0 || newX >= wallsLayer.getWidth()) ||
             (newY < 0 || newY >= wallsLayer.getHeight())) {
             System.out.println("Movement blocked - out of bounds");
@@ -63,7 +64,7 @@ public class Player {
         }
 
         // Check collision with walls layer
-        TiledMapTileLayer.Cell wallCell = wallsLayer.getCell((int)newX, (int)newY);
+        TiledMapTileLayer.Cell wallCell = wallsLayer.getCell((int)newX, (int)(newY + 1));
         if (wallCell != null && wallCell.getTile() != null) {
             System.out.println("Movement blocked - wall");
             return;
@@ -71,7 +72,6 @@ public class Player {
 
         // movement is valid -- set playerPosition to new position then update camera
         playerPosition.set(newX, newY);
-        System.out.println("player moved to: " + playerPosition);
     }
 
     /**
