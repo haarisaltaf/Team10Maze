@@ -57,7 +57,7 @@ public class mainMenu implements Screen {
     @Override
     public void show() {
         // implementing skin and stage
-        stage = new Stage(new FitViewport(640, 480));
+        stage = new Stage(viewport);
         Gdx.input.setInputProcessor(stage);
         Skin buttonSkin = new Skin(Gdx.files.internal("uiskin.json"));
 
@@ -131,6 +131,7 @@ public class mainMenu implements Screen {
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height, true);
+        stage.getViewport().update(width, height, true);
         updateLayout();   // Re-center UI + background on resize
     }
 
