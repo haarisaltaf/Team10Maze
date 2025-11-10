@@ -9,7 +9,7 @@ References to the creators of assets are in the credits below
 <details>
 <summary><strong><span style="font-size: 1.6em;">All PDF Documents</span></strong></summary>
 <a href="https://drive.google.com/file/d/1Bnf6GXtxXmRcdF38c6dxREUE3fmsUMTX/view?usp=drive_link">Requirements PDF (Req1.pdf)</a><br>
-<a href="https://drive.google.com/file/d/1A0bq1otF-NJ0evaNL-rjkhA7n3xlaIC9/view?usp=drive_link">Architecture PDF (Arch1.pdf)</a><br>
+<a href="https://drive.google.com/file/d/1A0bq1otF-NJ0evaNL-rjkhA7n3xlaIC9/view?usp=sharing">Architecture PDF (Arch1.pdf)</a><br>
 <a href="https://drive.google.com/file/d/1A0bq1otF-NJ0evaNL-rjkhA7n3xlaIC9/view?usp=drive_link">Method Selection and Planning PDF (Plan1.pdf)</a>
 <br>
 <a href="https://drive.google.com/file/d/1Bnf6GXtxXmRcdF38c6dxREUE3fmsUMTX/view?usp=drive_link">Risk Assessment and Mitigation PDF (Risk1.pdf) </a>
