@@ -143,7 +143,7 @@ public class map1Maze implements Screen {
         // if gameEnding == true then endMap() SHOULD have already been called so can just return;
         if (gameEnding) {
             // clear the screen before transitioning to prevent showing map in background
-            Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
+            Gdx.gl.glClearColor(0f, 0f, 0f, 0f);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             return;
         }
@@ -156,7 +156,7 @@ public class map1Maze implements Screen {
         }
 
         cameraMap1.update();
-        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
+        Gdx.gl.glClearColor(0f, 0f, 0f, 0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         mapManager.getMapRenderer().setView(cameraMap1);
         mapManager.getMapRenderer().render();
