@@ -3,20 +3,8 @@ Maze game created using Java for ENG1.
 
 ### THE PDF DOCUMENTS ARE STORED IN THE FOLDER ENTITLED 'PDF DOCUMENTS' AND ALSO AVAILABLE BELOW
 
-### To run:
-cd into this directory and type "./gradlew run" -- if on windows: "gradlew.bat run"
-
-### Relative path for the game.java itself (the game is stored here)
-#### core/src/main/java/com/Team10/Team10Maze/mazeGame.java
-mazeGame.java is our main entrypoint to game.
-Made it modular so can create classes for mainMenu, mazeMap1, etc.
-
 ### References and Notes
-References to the creators of assets in assets/usedAssetReferences.md
-
-** Overall notes on libGDX and how the game loop works (moreso for devs) is in libGDXNotes.md -- Starting of documentation
-
-
+References to the creators of assets are in the credits below
 
 <details>
 <summary><strong><span style="font-size: 1.6em;">All PDF Documents</span></strong></summary>
@@ -78,4 +66,18 @@ Week 6 was reading week, and we therefore made no progress in code.
 <br>
 <img width="874" height="877" alt="end of week 6" src="https://github.com/user-attachments/assets/c1a24aa2-2e92-4932-aad8-f23376e9c948" />
 <br>
+</details>
+
+<details>
+<summary><strong><span style="font-size: 1.6em;">Credits</span></strong></summary>
+Styloo Assets (https://styloo.itch.io/2dclassroom)<br>
+Tiled Map Editor (https://www.mapeditor.org/)<br>
+LibGDX Game Engine (https://libgdx.com/)<br>
+Nectanebo (https://nectanebo.itch.io/menu-buttons?download)<br>
+Kenney-Assets (https://kenney-assets.itch.io/splat-pack?download)<br>
+Pixelnauta (https://pixelnauta.itch.io/pixel-dimensional-portal-32x32)<br>
+Caz Creates Games (https://caz-creates-games.itch.io/ducky-3)<br>
+Lumi Li (https://lumi-li.itch.io/pixel-bakery-assets?download)<br>
+Zero Faction Games (https://zerofactiongames.com/2015/07/30/game-asset-2d-character-sprite-sheet/)<br>
+
 </details>
