@@ -33,6 +33,7 @@ References to the creators of assets in assets/usedAssetReferences.md
 
 <h3>End of Week 1</h3>
 <img width="1000" height="530" alt="end of week 1" src="https://github.com/haarisaltaf/Team10Maze/blob/main/assets/milestoneimages/week_1.jpg?raw=true" />
+<p>Little test here</p>
 
 <h3>End of Week 2</h3>
 <img width="1000" height="530" alt="end of week 2" src="https://github.com/haarisaltaf/Team10Maze/blob/main/assets/milestoneimages/week_2.jpg?raw=true" />
