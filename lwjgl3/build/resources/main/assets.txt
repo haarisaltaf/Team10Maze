@@ -11,7 +11,6 @@ milestoneimages/week_3.jpg
 milestoneimages/week_4.jpg
 split2dClassroom/resizedComputer/tranaparent_table.png
 split2dClassroom/resizedComputer/transparent_computer.png
-split2dClassroom/resizedWalls/Dimensional_Portal.png
 split2dClassroom/resizedWalls/bread.png
 split2dClassroom/resizedWalls/splat01_imresize.png
 split2dClassroom/resizedWalls/splat_transparent.png

@@ -222,6 +222,9 @@ public class map1Maze implements Screen {
             if (specialTiles.isDecreaseTimeCollected()) {
                 font.draw(batch, "Stepped in Mud!!!! -5 Seconds", 20, 100);
             }
+            if (specialTiles.hasRandomTeleportTriggered()) {
+                font.draw(batch, "Stepped in Sinkhole!!!!!! Sent Back to Beginning", 20, 120);
+            }
 
         } else {
             font.getData().setScale(3f);
