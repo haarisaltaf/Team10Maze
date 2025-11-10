@@ -1,6 +1,8 @@
 # Team10Maze
 Maze game created using Java for ENG1.
 
+### THE PDF DOCUMENTS ARE STORED IN THE FOLDER ENTITLED 'PDF DOCUMENTS'
+
 ### To run:
 cd into this directory and type "./gradlew run" -- if on windows: "gradlew.bat run"
 
