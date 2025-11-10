@@ -4,7 +4,7 @@ Maze game created using Java for ENG1.
 ### THE PDF DOCUMENTS ARE STORED IN THE FOLDER ENTITLED 'PDF DOCUMENTS' AND ALSO AVAILABLE BELOW
 
 ### Link to the GitHub Repository
-<a href="https://github.com/haarisaltaf">GitHub Repo</a>
+<a href="https://github.com/haarisaltaf/Team10Maze">GitHub Repository</a>
 
 ### References and Notes
 References to the creators of assets are in the credits below
