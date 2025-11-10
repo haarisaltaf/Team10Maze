@@ -304,7 +304,7 @@ public class map1Maze implements Screen {
         Gdx.app.postRunnable(new Runnable() {
             @Override
             public void run() {
-                game.setScreen(new gameOver(game, gameWon));
+                game.setScreen(new gameOver(game, gameWon, gameTimer.getTimeLeft()));
                 dispose();
             }
         });
@@ -330,6 +330,8 @@ public class map1Maze implements Screen {
         if (specialTiles.checkAddTimeCollision(player.getPosition())) {
             gameTimer.addTime(5f);
         }
+
+        
 
         // Check decreaseTime
         if (specialTiles.checkDecreaseTimeCollision(player.getPosition())) {

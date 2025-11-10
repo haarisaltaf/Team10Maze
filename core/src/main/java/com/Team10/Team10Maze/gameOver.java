@@ -20,6 +20,7 @@ public class gameOver implements Screen {
 
     private final mazeGame game;
     private boolean gameWon;
+    private float gameScore;
     private Stage stage;
     private Viewport viewport;
 
@@ -29,9 +30,10 @@ public class gameOver implements Screen {
      * @param game The game instance that allows us to change the screen
      * @param gameWon True if the player won the game, false if they lost
      */
-    public gameOver(mazeGame game, boolean gameWon) {
+    public gameOver(mazeGame game, boolean gameWon, float timeLeft) {
         this.game = game;
         this.gameWon = gameWon;
+        this.gameScore = gameWon ? Math.round(1000f * (timeLeft / 300f)) : 0f;
     }
 
 
@@ -63,6 +65,12 @@ public class gameOver implements Screen {
         endText.setPosition(viewport.getWorldWidth() / 2f, viewport.getWorldHeight() / 2f, Align.center);
         stage.addActor(endText);
 
+        Label gameScore = new Label("Final score: " + this.gameScore, labelStyle);
+        gameScore.setFontScale(2f);
+        gameScore.setSize(gameScore.getPrefWidth(), gameScore.getPrefHeight());
+        gameScore.setAlignment(Align.center);
+        gameScore.setPosition(viewport.getWorldWidth() / 2f, viewport.getWorldHeight() / 2f - 60f, Align.center);
+        stage.addActor(gameScore);
 
         Timer.schedule(new Timer.Task() {
             @Override
@@ -71,7 +79,7 @@ public class gameOver implements Screen {
                 pressKey.setFontScale(1.2f);
                 pressKey.setSize(pressKey.getPrefWidth(), pressKey.getPrefHeight());
                 pressKey.setAlignment(Align.center);
-                pressKey.setPosition(viewport.getWorldWidth() / 2f, viewport.getWorldHeight() / 2f - 80f, Align.center);
+                pressKey.setPosition(viewport.getWorldWidth() / 2f, viewport.getWorldHeight() / 2f - 120f, Align.center);
                 pressKey.getColor().a = 0f;    
 
                 stage.addActor(pressKey);
