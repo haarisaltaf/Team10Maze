@@ -19,11 +19,11 @@ References to the creators of assets in assets/usedAssetReferences.md
 
 <details>
 <summary><strong><span style="font-size: 1.6em;">All PDF Documents</span></strong></summary>
-<a href="https://drive.google.com/file/d/1Hgd4vTJ5N_BBwlT92-7vdJ-tNK3ZzNbp/view?usp=drive_link">Requirements PDF (Req1.PDF)</a><br>
-<a href="https://drive.google.com/file/d/1Hgd4vTJ5N_BBwlT92-7vdJ-tNK3ZzNbp/view?usp=drive_link">Architecture PDF (Arch1.PDF)</a><br>
-<a href="https://drive.google.com/file/d/1hRtcdaW9J4uew12p8ApdigCHjG9S_Rvn/view?usp=drive_link">Method selection and planning</a>
+<a href="https://drive.google.com/file/d/1Hgd4vTJ5N_BBwlT92-7vdJ-tNK3ZzNbp/view?usp=drive_link">Requirements PDF (Req1.pdf)</a><br>
+<a href="https://drive.google.com/file/d/1Hgd4vTJ5N_BBwlT92-7vdJ-tNK3ZzNbp/view?usp=drive_link">Architecture PDF (Arch1.pdf)</a><br>
+<a href="https://drive.google.com/file/d/1hRtcdaW9J4uew12p8ApdigCHjG9S_Rvn/view?usp=drive_link">Method Selection and Planning PDF (Plan1.pdf)</a>
 <br>
-<a href="https://drive.google.com/file/d/1Bnf6GXtxXmRcdF38c6dxREUE3fmsUMTX/view?usp=drive_link">Risk assessment and mitigation PDF (Risk1.pdf) </a>
+<a href="https://drive.google.com/file/d/1Bnf6GXtxXmRcdF38c6dxREUE3fmsUMTX/view?usp=drive_link">Risk Assessment and Mitigation PDF (Risk1.pdf) </a>
 <br>
 <a href="https://drive.google.com/file/d/1490EBDPoZv2av8ABkgppfcvz-JUzuhh-/view?usp=drive_link">Implementation PDF (Impl1.pdf)</a>
 
