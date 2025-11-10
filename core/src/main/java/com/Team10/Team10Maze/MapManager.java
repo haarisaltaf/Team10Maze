@@ -20,6 +20,7 @@ public class MapManager {
     private OrthogonalTiledMapRenderer mapRenderer;
     private TiledMapTileLayer wallsLayer;
     private TiledMapTileLayer groundLayer;
+    private MapLayer specialsLayer;
     private int tileSize = 32;
 
     // Special locations that will be found
@@ -29,31 +30,39 @@ public class MapManager {
     private Vector2 playerSpawnPosition;
     private Vector2 chaserSpawnPosition;
 
+    /**
+     * Initialises the map manager and loads the tiled map.
+     */
     public MapManager() {
         loadTiledMap();
     }
 
+    /**
+     * Loads the tiled map, initialises the map renderer, extracts tile layers, and handles special objects
+     */
     private void loadTiledMap() {
-        // load map1.tmx
         tiledMap1 = new TmxMapLoader().load("maps/Team10Maze1.tmx");
         // Renderer, 1 tile = 32 pixels
         mapRenderer = new OrthogonalTiledMapRenderer(tiledMap1, 1f / tileSize);
 
-        // get Tile Layers from tileMap -- set as: walls, specials, ground
         groundLayer = (TiledMapTileLayer) tiledMap1.getLayers().get("ground");
         wallsLayer = (TiledMapTileLayer) tiledMap1.getLayers().get("walls");
 
-        // will need to handle special types
-        // saved as class attributes (playerPosition, addTimeArea, goalArea)
+        // saves as class attributes (playerPosition, addTimeArea, goalArea)
         handleSpecials();
     }
 
+    /**
+     * Iterates over every object in specials layer then checks if they are a Rectangle then
+     * checks what type they are and handles if they are player spawn, chaser spawn, goal area,
+     * add time area, and decrease time area
+     */
     public void handleSpecials() {
         MapLayer specialsLayer = tiledMap1.getLayers().get("specials");
         MapObjects specials = specialsLayer.getObjects();
 
         // check the type property (goal, add_time, player_spawn)
-        for (MapObject special : specials) {
+        for (MapObject special : specialsLayer.getObjects()) {
             // in the map we have only set the rectangle to have type
             // property so can easily skip non-rectangles
             if (!(special instanceof RectangleMapObject)) continue;
@@ -99,40 +108,84 @@ public class MapManager {
             }
             // remember to add to checkSpecialTileCollision() to handle when playerPosition overlaps
         }
+        // TODO: handle if areas aren't found or dont exist -- moreso just edge case
     }
 
+    /**
+     * Returns the tiled map renderer
+     *
+     * @return The map renderer used to render the tiled map
+     */
     public OrthogonalTiledMapRenderer getMapRenderer() {
         return mapRenderer;
     }
 
+    /**
+     * Returns the walls tile layer from the tiled map
+     *
+     * @return The walls layer used for collision detection
+     */
     public TiledMapTileLayer getWallsLayer() {
         return wallsLayer;
     }
 
+    /**
+     * Returns the ground tile layer from the tiled map
+     *
+     * @return The ground layer
+     */
     public TiledMapTileLayer getGroundLayer() {
         return groundLayer;
     }
 
+    /**
+     * Returns the goalArea rectangle from the map
+     *
+     * @return Rectangle defining the goal area on the map
+     */
     public Rectangle getGoalArea() {
         return goalArea;
     }
 
+    /**
+     * Returns the addTime powerup area rectangle from the map
+     *
+     * @return Rectangle defining the add time powerup area on the map
+     */
     public Rectangle getAddTimeArea() {
         return addTimeArea;
     }
 
+    /**
+     * Returns the decrease_time debuff  rectangle from the map
+     *
+     * @return Rectangle defining the decrease time debuff area on the map
+     */
     public Rectangle getDecreaseTimeArea() {
         return decreaseTimeArea;
     }
 
+    /**
+     * Returns the player spawn position
+     *
+     * @return Vector of the player's starting position
+     */
     public Vector2 getPlayerSpawnPosition() {
         return playerSpawnPosition;
     }
 
+    /**
+     * Returns the chaser spawn position parsed from the map
+     *
+     * @return Vector of the chaser's starting position
+     */
     public Vector2 getChaserSpawnPosition() {
         return chaserSpawnPosition;
     }
 
+    /**
+     * Disposes the tiled map and renderer
+     */
     public void dispose() {
         tiledMap1.dispose();
         mapRenderer.dispose();

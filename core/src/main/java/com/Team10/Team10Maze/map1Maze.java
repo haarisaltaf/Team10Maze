@@ -37,10 +37,10 @@ public class map1Maze implements Screen {
     private boolean gamePaused = false;
 
     // checks if gameending == True then goes to main menu as finished
-    
+
     /**
      * Initalises the first map of the maze
-     * 
+     *
      * @param game The game instance that allows us to change the screen
      */
     public map1Maze(mazeGame game) {
@@ -134,7 +134,7 @@ public class map1Maze implements Screen {
      *  <li>Detecting game ending conditions</li>
      *  <li>Rendering the UI</li>
      * </ul>
-     * 
+     *
      * @param delta Time passed in seconds since the last frame was rendered
      */
     @Override
@@ -247,7 +247,7 @@ public class map1Maze implements Screen {
 
     /**
      * Handles player input
-     * 
+     *
      * <ul>
      *  <li>Uses user input to move the player</li>
      *  <li>Uses user input to pause/resume the game</li>
@@ -296,7 +296,7 @@ public class map1Maze implements Screen {
 
     /**
      * Sets the user to the game over screen
-     * 
+     *
      * @param gameWon True if the player won the game, false if they lost
      */
     private void endMap(boolean gameWon) {
@@ -312,7 +312,7 @@ public class map1Maze implements Screen {
 
     /**
      * Checks for different types of collisions
-     * 
+     *
      * <ul>
      *  <li>If the player reached the end coordinates</li>
      *  <li>If the player reached the buff (adds 5seconds of time)</li>
