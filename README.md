@@ -6,6 +6,12 @@ Maze game created using Java for ENG1.
 ### Link to the GitHub Repository
 <a href="https://github.com/haarisaltaf/Team10Maze">GitHub Repository</a>
 
+### Link to the .jar executable file.
+<a href="https://drive.google.com/file/d/18Z9tZHeaCeItrXPJ3hrTZo7PACtVBSsv/view?usp=sharing">LongBoiOnTheRun.jar</a>
+
+### Link to the version control repository (GitHub Commits Page)
+<a href="https://github.com/haarisaltaf/Team10Maze/commits/main/">Team10Maze Commits</a>
+
 ### References and Notes
 References to the creators of assets are in the credits below
 
