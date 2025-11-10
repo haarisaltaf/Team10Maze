@@ -54,7 +54,7 @@ public class SpecialTiles {
      */
     public boolean checkAddTimeCollision(Vector2 playerPosition) {
         if (!addTimeCollected && addTimeArea != null && addTimeArea.contains(playerPosition)) {
-            System.out.println("addtime collected! +5 seconds");
+            System.out.println("Bread munched!!!! +5 seconds");
             specialCounter += 1;
             addTimeCollected = true;
             return true;
@@ -71,7 +71,7 @@ public class SpecialTiles {
      */
     public boolean checkDecreaseTimeCollision(Vector2 playerPosition) {
         if (!decreaseTimeCollected && decreaseTimeArea != null && decreaseTimeArea.contains(playerPosition)) {
-            System.out.println("decreaseTime collected! +5 seconds");
+            System.out.println("Stepped in mud!!!! -5 seconds");
             specialCounter += 1;
             decreaseTimeCollected = true;
             return true;

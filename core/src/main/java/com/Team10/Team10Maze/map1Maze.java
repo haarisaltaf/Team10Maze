@@ -216,11 +216,11 @@ public class map1Maze implements Screen {
 
             // showing if addTime has been collected
             if (specialTiles.isAddTimeCollected()) {
-                font.draw(batch, "addTime collected!", 20, 80);
+                font.draw(batch, "Bread Munched!!!! +5 Seconds", 20, 80);
             }
 
             if (specialTiles.isDecreaseTimeCollected()) {
-                font.draw(batch, "decreaseTime collected!", 20, 100);
+                font.draw(batch, "Stepped in Mud!!!! -5 Seconds", 20, 100);
             }
 
         } else {
@@ -331,7 +331,7 @@ public class map1Maze implements Screen {
             gameTimer.addTime(5f);
         }
 
-        
+
 
         // Check decreaseTime
         if (specialTiles.checkDecreaseTimeCollision(player.getPosition())) {
