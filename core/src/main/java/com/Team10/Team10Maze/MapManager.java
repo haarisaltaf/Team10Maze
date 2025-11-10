@@ -20,6 +20,7 @@ public class MapManager {
     private OrthogonalTiledMapRenderer mapRenderer;
     private TiledMapTileLayer wallsLayer;
     private TiledMapTileLayer groundLayer;
+    private boolean firstTimeRunning;
     private MapLayer specialsLayer;
     private int tileSize = 32;
 
@@ -28,13 +29,15 @@ public class MapManager {
     private Rectangle addTimeArea;
     private Rectangle decreaseTimeArea;
     private Rectangle randomTeleportArea;
-    private Vector2 playerSpawnPosition;
+    private Vector2 currentPlayerPosition;
     private Vector2 chaserSpawnPosition;
+    private Vector2 playerSpawnPosition;
 
     /**
      * Initialises the map manager and loads the tiled map.
      */
     public MapManager() {
+        this.firstTimeRunning = true;
         loadTiledMap();
     }
 
@@ -86,8 +89,12 @@ public class MapManager {
             // stores location of each to then check if overlap ever occurs
             switch (type) {
                 case "player_spawn" :
-                    playerSpawnPosition = new Vector2(tileX, tileY);
-                    System.out.println("Found player spawn at: " + playerSpawnPosition);
+                    if (firstTimeRunning) {
+                        playerSpawnPosition = new Vector2(tileX, tileY);
+                        this.firstTimeRunning = false;
+                    }
+                    currentPlayerPosition = new Vector2(tileX, tileY);
+                    System.out.println("Found player spawn at: " + currentPlayerPosition);
                     break;
                 case "add_time" :
                     // on map, areas have been drawn as 2x2 areas
@@ -180,11 +187,20 @@ public class MapManager {
     }
 
     /**
+     * Returns the players current position
+     *
+     * @return Vector of the player's current position
+     */
+    public Vector2 getPlayerCurrentPosition() {
+        return currentPlayerPosition;
+    }
+
+    /**
      * Returns the player spawn position
      *
      * @return Vector of the player's starting position
      */
-    public Vector2 getPlayerSpawnPosition() {
+    public Vector2 getPlayerStartPosition() {
         return playerSpawnPosition;
     }
 

@@ -64,7 +64,7 @@ public class map1Maze implements Screen {
         cameraMap1.setToOrtho(false, 18, 18);
 
         // initialize player with spawn position from map
-        player = new Player(mapManager.getPlayerSpawnPosition(), mapManager.getWallsLayer());
+        player = new Player(mapManager.getPlayerCurrentPosition(), mapManager.getWallsLayer());
 
         gameTimer = new GameTimer(300); // 5 mins
 
@@ -339,7 +339,8 @@ public class map1Maze implements Screen {
         }
 
         if (specialTiles.checkRandomTeleportTriggered(player.getPosition())) {
-            player.getPosition().set(mapManager.getPlayerSpawnPosition());
+            System.out.println("Spawn: " + mapManager.getPlayerStartPosition());
+            player.getPosition().set(mapManager.getPlayerStartPosition());
         }
     }
 
