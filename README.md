@@ -32,16 +32,16 @@ References to the creators of assets in assets/usedAssetReferences.md
 
 
 ## End of Week 1
-<img width="1000" height="530" alt="end of week 1" src="/assets/milestoneimages/week_1.jpg" />
+<img width="1000" height="530" alt="end of week 1" src="https://github.com/haarisaltaf/Team10Maze/tree/main/assets/milestoneimages/week_1.jpg" />
 
 ## End of Week 2
-<img width="1000" height="530" alt="end of week 2" src="/assets/milestoneimages/week_2.jpg" />
+<img width="1000" height="530" alt="end of week 2" src="https://github.com/haarisaltaf/Team10Maze/tree/main/assets/milestoneimages/week_2.jpg" />
 
 ## End of Week 3
-<img width="1000" height="530" alt="end of week 3" src="/assets/milestoneimages/week_3.jpg" />
+<img width="1000" height="530" alt="end of week 3" src="https://github.com/haarisaltaf/Team10Maze/tree/main/assets/milestoneimages/week_3.jpg" />
 
 ## End of Week 4
-<img width="1000" height="530" alt="end of week 4" src="/assets/milestoneimages/week_4.jpg" />
+<img width="1000" height="530" alt="end of week 4" src="https://github.com/haarisaltaf/Team10Maze/tree/main/assets/milestoneimages/week_4.jpg" />
 
 
 </details>
