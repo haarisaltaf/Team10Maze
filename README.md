@@ -8,13 +8,13 @@ References to the creators of assets are in the credits below
 
 <details>
 <summary><strong><span style="font-size: 1.6em;">All PDF Documents</span></strong></summary>
-<a href="https://drive.google.com/file/d/1Hgd4vTJ5N_BBwlT92-7vdJ-tNK3ZzNbp/view?usp=drive_link">Requirements PDF (Req1.pdf)</a><br>
-<a href="https://drive.google.com/file/d/1Hgd4vTJ5N_BBwlT92-7vdJ-tNK3ZzNbp/view?usp=drive_link">Architecture PDF (Arch1.pdf)</a><br>
-<a href="https://drive.google.com/file/d/1hRtcdaW9J4uew12p8ApdigCHjG9S_Rvn/view?usp=drive_link">Method Selection and Planning PDF (Plan1.pdf)</a>
+<a href="https://drive.google.com/file/d/1Bnf6GXtxXmRcdF38c6dxREUE3fmsUMTX/view?usp=drive_link">Requirements PDF (Req1.pdf)</a><br>
+<a href="https://drive.google.com/file/d/1A0bq1otF-NJ0evaNL-rjkhA7n3xlaIC9/view?usp=drive_link">Architecture PDF (Arch1.pdf)</a><br>
+<a href="https://drive.google.com/file/d/1A0bq1otF-NJ0evaNL-rjkhA7n3xlaIC9/view?usp=drive_link">Method Selection and Planning PDF (Plan1.pdf)</a>
 <br>
 <a href="https://drive.google.com/file/d/1Bnf6GXtxXmRcdF38c6dxREUE3fmsUMTX/view?usp=drive_link">Risk Assessment and Mitigation PDF (Risk1.pdf) </a>
 <br>
-<a href="https://drive.google.com/file/d/1490EBDPoZv2av8ABkgppfcvz-JUzuhh-/view?usp=drive_link">Implementation PDF (Impl1.pdf)</a>
+<a href="https://drive.google.com/file/d/13XwSZQI3rr-pVcf84mjbjaLBU3u3-p4_/view?usp=sharing">Implementation PDF (Impl1.pdf)</a>
 
 </details>
 
@@ -75,7 +75,6 @@ Tiled Map Editor (https://www.mapeditor.org/)<br>
 LibGDX Game Engine (https://libgdx.com/)<br>
 Nectanebo (https://nectanebo.itch.io/menu-buttons?download)<br>
 Kenney-Assets (https://kenney-assets.itch.io/splat-pack?download)<br>
-Pixelnauta (https://pixelnauta.itch.io/pixel-dimensional-portal-32x32)<br>
 Caz Creates Games (https://caz-creates-games.itch.io/ducky-3)<br>
 Lumi Li (https://lumi-li.itch.io/pixel-bakery-assets?download)<br>
 Zero Faction Games (https://zerofactiongames.com/2015/07/30/game-asset-2d-character-sprite-sheet/)<br>
