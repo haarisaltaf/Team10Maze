@@ -34,8 +34,7 @@ References to the creators of assets in assets/usedAssetReferences.md
 <summary><strong><span style="font-size: 1.6em;">Architecture Documentation Additional Content</span></strong></summary>
 
 <h3>First Iteration of Architecture - UML Class Diagram</h3>
-<img width="400" height="400" alt="end of week 1" src="https://github.com/user-attachments/assets/b75ce4b9-3815-4bc2-bc5e-64dd1c4871a1
-" />
+<img width="400" height="400" alt="end of week 1" src="https://github.com/user-attachments/assets/b75ce4b9-3815-4bc2-bc5e-64dd1c4871a1"/>
 <br>
 This was the first iteration of our architecture which has been expressed as a UML Class Diagram.
 </details>
