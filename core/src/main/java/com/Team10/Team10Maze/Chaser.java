@@ -48,14 +48,7 @@ public class Chaser {
 
         if (moveTimer >= MOVE_INTERVAL) {
             moveTimer = 0f;
-
-            float distance = position.dst(playerPosition);
-
-            if (distance < CHASE_RANGE) {
-                chasePlayer(playerPosition);
-            } else {
-                randomMovement();
-            }
+            chasePlayer(playerPosition);
         }
     }
 
@@ -135,7 +128,7 @@ public class Chaser {
     private void attemptMove(int dx, int dy) {
         float newX = position.x + dx;
         float newY = position.y + dy;
-        TiledMapTileLayer.Cell wallCell = this.walls.getCell((int)newX, (int)newY);
+        TiledMapTileLayer.Cell wallCell = this.walls.getCell((int)newX, (int)(newY + 1));
 
         // check if out of bounds
         if ( (newX < 0 || newX >= this.walls.getWidth()) ||
@@ -150,6 +143,7 @@ public class Chaser {
 
         else {
             position.set(newX, newY);
+
         }
     }
 
