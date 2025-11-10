@@ -28,22 +28,12 @@ References to the creators of assets in assets/usedAssetReferences.md
 </details>
 
 <details>
-<summary><strong><span style="font-size: 1.6em;">Milestone images</span></strong></summary>
+<summary><strong><span style="font-size: 1.6em;">Architecture Documentation Additional Content</span></strong></summary>
 
 
-<h3>End of Week 1</h3>
-<img width="1000" height="530" alt="end of week 1" src="https://github.com/haarisaltaf/Team10Maze/blob/main/assets/milestoneimages/week_1.jpg?raw=true" />
-<p>Little test here</p>
-
-<h3>End of Week 2</h3>
-<img width="1000" height="530" alt="end of week 2" src="https://github.com/haarisaltaf/Team10Maze/blob/main/assets/milestoneimages/week_2.jpg?raw=true" />
-
-<h3>End of Week 3</h3>
-<img width="1000" height="530" alt="end of week 3" src="https://github.com/haarisaltaf/Team10Maze/blob/main/assets/milestoneimages/week_3.jpg?raw=true" />
-
-<h3>End of Week 4</h3>
-<img width="1000" height="530" alt="end of week 4" src="https://github.com/haarisaltaf/Team10Maze/blob/main/assets/milestoneimages/week_4.jpg?raw=true" />
-
+<h3>First Iteration of Architecture - UML Class Diagram</h3>
+<img width="1000" height="530" alt="end of week 1" src="https://drive.google.com/file/d/1Tw1bANP08p6hsE9iUE4Ihvkvz_Fa1NSq/view?usp=drive_link" />
+At the end of Week 1, we completed research on different game engines like LibGDX and assets. 
 
 </details>
 
