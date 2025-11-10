@@ -14,6 +14,39 @@ References to the creators of assets in assets/usedAssetReferences.md
 
 ** Overall notes on libGDX and how the game loop works (moreso for devs) is in libGDXNotes.md -- Starting of documentation
 
+
+<details>
+<summary><strong><span style="font-size: 1.6em;">All PDF Documents</span></strong></summary>
+
+<a href="https://drive.google.com/file/d/1Bnf6GXtxXmRcdF38c6dxREUE3fmsUMTX/view?usp=drive_link">Risk assessment and mitigation</a><br>
+<a href="https://drive.google.com/file/d/1Hgd4vTJ5N_BBwlT92-7vdJ-tNK3ZzNbp/view?usp=drive_link">Requirements</a><br>
+<a href="https://drive.google.com/file/d/1hRtcdaW9J4uew12p8ApdigCHjG9S_Rvn/view?usp=drive_link">Method selection and planning</a><br>
+<a href="https://drive.google.com/file/d/1490EBDPoZv2av8ABkgppfcvz-JUzuhh-/view?usp=drive_link">Implementation</a>
+
+</details>
+
+<details>
+<summary><strong><span style="font-size: 1.6em;">Milestone images</span></strong></summary>
+
+
+## End of Week 1
+<img width="1000" height="530" alt="end of week 1" src="/assets/milestoneimages/week_1.jpg" />
+
+## End of Week 2
+<img width="1000" height="530" alt="end of week 2" src="/assets/milestoneimages/week_2.jpg" />
+
+## End of Week 3
+<img width="1000" height="530" alt="end of week 3" src="/assets/milestoneimages/week_3.jpg" />
+
+## End of Week 4
+<img width="1000" height="530" alt="end of week 4" src="/assets/milestoneimages/week_4.jpg" />
+
+
+</details>
+
+<details>
+<summary><strong><span style="font-size: 1.6em;">Gantt Chart</span></strong></summary>
+
 ## End of Week 1
 <img width="689" height="816" alt="end of week 1" src="https://github.com/user-attachments/assets/5a49c37d-ae56-4daf-bd64-137cef93f0bc" />
 
@@ -46,3 +79,4 @@ At the end of week 5, we converted to movement system from a 2D array to a libra
 <img width="874" height="877" alt="end of week 6" src="https://github.com/user-attachments/assets/c1a24aa2-2e92-4932-aad8-f23376e9c948" />
 
 Week 6 was reading week, and we therefore made no progress in code.
+</details>
