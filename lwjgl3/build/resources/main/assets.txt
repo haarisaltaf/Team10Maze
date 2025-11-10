@@ -176,6 +176,7 @@ maps/Team10Maze1.tmx
 maps/Team10Maze2.tmx
 maps/classFloor.tsx
 maps/groundtileset.tsx
+maps/resizedTableComputer.tsx
 maps/walls.tsx
 maps/wallsDoorsFloors.tsx
 milestoneimages/week_1.jpg
@@ -231,6 +232,8 @@ split2dClassroom/computer/computers__6.png
 split2dClassroom/computer/computers__7.png
 split2dClassroom/computer/computers__8.png
 split2dClassroom/computer/computers__9.png
+split2dClassroom/resizedComputer/tranaparent_table.png
+split2dClassroom/resizedComputer/transparent_computer.png
 split2dClassroom/resizedWalls/wall_180.png
 split2dClassroom/resizedWalls/wall_270.png
 split2dClassroom/resizedWalls/wall_90.png
