@@ -64,11 +64,17 @@ At the end of week 5, we converted to movement system from a 2D array to a libra
 <img width="826" height="877" alt="end of week 5" src="https://github.com/user-attachments/assets/42796a0a-533a-450f-9112-80fa098bcfba" />
 <br>
 
-<h3>End of Week 6</h3>
+<h3>End of Week 7</h3>
 Week 6 was reading week, and we therefore made no progress in code.
 <br>
 <img width="874" height="877" alt="end of week 6" src="https://github.com/user-attachments/assets/c1a24aa2-2e92-4932-aad8-f23376e9c948" />
 <br>
+
+<h3>End of Week 6</h3>
+Week 7 was our last week before submission, forcing us to make progress until completion. 
+<br>
+
+<img width="874" height="894" alt="end of week 7" src="https://github.com/user-attachments/assets/2405c266-aa15-4e3a-a9b9-fb69b82ec44b" />
 </details>
 
 <details>
