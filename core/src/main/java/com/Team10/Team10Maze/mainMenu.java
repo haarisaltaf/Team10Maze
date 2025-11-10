@@ -28,6 +28,7 @@ public class mainMenu implements Screen {
     private FitViewport viewport;
     private Stage stage;
     private TextButton playButton;
+    private TextButton quitButton;
     // TODO: change to TextureRegion[][] ... = TextureRegion.split() to auto split the entire image evenly into tiles - sort out once more than just the background is needed
 
 
@@ -63,11 +64,10 @@ public class mainMenu implements Screen {
 
 
         // implementing button and click listener
-        TextButton.TextButtonStyle transparentStyle = new TextButton.TextButtonStyle();
-        transparentStyle.font = buttonSkin.getFont("default-font");
-
-        playButton = new TextButton("Play", transparentStyle);
-        playButton.setSize(120, 60);
+        playButton = new TextButton("", buttonSkin);
+        playButton.setSize(550, 150);
+        playButton.setPosition(42, 230);
+        playButton.getColor().a = 0;
         stage.addActor(playButton);
 
         playButton.addListener(new ClickListener() {
@@ -81,27 +81,25 @@ public class mainMenu implements Screen {
 
         });
 
+        quitButton = new TextButton("", buttonSkin);
+        quitButton.setSize(550, 150);
+        quitButton.setPosition(42, 50);
+        quitButton.getColor().a = 0;
+        stage.addActor(quitButton);
+
+        quitButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.exit();
+            }
+        });
+
         // background
         batch = new SpriteBatch(); // new creating batch image
 
-        dungeonGroundsTexture = new Texture("SGQ_Dungeon/grounds_and_walls/grounds.png");
-        menuBackground = new TextureRegion(dungeonGroundsTexture, 64, 192, 64, 64);
+        dungeonGroundsTexture = new Texture("main_menu.jpg");
+        menuBackground = new TextureRegion(dungeonGroundsTexture, 0, 0, 480, 480);
 
-        updateLayout(); // Position button based on current screen size
-    }
-
-    /**
-     * Used to reposition the button based on width and height changes
-     */
-    private void updateLayout() {
-        float worldWidth = viewport.getWorldWidth();
-        float worldHeight = viewport.getWorldHeight();
-
-        // Resizes the play button whenever width/height changes
-        playButton.setPosition(
-                worldWidth / 4f - playButton.getWidth() / 2f,
-                worldHeight / 4f - playButton.getHeight() / 2f
-        );
     }
 
     /**
@@ -132,7 +130,6 @@ public class mainMenu implements Screen {
     public void resize(int width, int height) {
         viewport.update(width, height, true);
         stage.getViewport().update(width, height, true);
-        updateLayout();   // Re-center UI + background on resize
     }
 
     /**

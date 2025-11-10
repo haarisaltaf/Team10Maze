@@ -30,9 +30,9 @@ public class Player {
      * Loads the player texture
      */
     private void loadPlayerSprite() {
-        playerTexture = new Texture("SGQ_Dungeon/characters/main/elf.png");
+        playerTexture = new Texture("characters/longboi.png");
         // TODO: change sprite to face correct direction of movement
-        playerSprite = new TextureRegion(playerTexture, 0, 0, 16, 16);
+        playerSprite = new TextureRegion(playerTexture, 0, 0, 32, 32);
         System.out.println("Player sprite loaded from tileset");
     }
 

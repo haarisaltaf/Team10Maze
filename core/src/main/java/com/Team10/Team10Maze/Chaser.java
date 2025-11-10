@@ -56,8 +56,8 @@ public class Chaser {
      * Loads the sprite used for the chaser
      */
     private void loadSprite() {
-        texture = new Texture("SGQ_Dungeon/characters/enemies/rat.png");
-        sprite = new TextureRegion(texture, 0, 0, 16, 16);
+        texture = new Texture("characters/teacher.png");
+        sprite = new TextureRegion(texture, 0, 0, 32, 32);
     }
 
     /**
