@@ -72,7 +72,8 @@ public class map1Maze implements Screen {
         specialTiles = new SpecialTiles(
             mapManager.getGoalArea(),
             mapManager.getAddTimeArea(),
-            mapManager.getDecreaseTimeArea()
+            mapManager.getDecreaseTimeArea(),
+            mapManager.getRandomTeleportArea()
         );
 
         // initialize chaser
@@ -336,6 +337,10 @@ public class map1Maze implements Screen {
         // Check decreaseTime
         if (specialTiles.checkDecreaseTimeCollision(player.getPosition())) {
             gameTimer.decreaseTime(5f);
+        }
+
+        if (specialTiles.checkRandomTeleportTriggered(player.getPosition())) {
+            player.getPosition().set(mapManager.getPlayerSpawnPosition());
         }
     }
 

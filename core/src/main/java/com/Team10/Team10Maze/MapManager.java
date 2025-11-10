@@ -27,6 +27,7 @@ public class MapManager {
     private Rectangle goalArea;
     private Rectangle addTimeArea;
     private Rectangle decreaseTimeArea;
+    private Rectangle randomTeleportArea;
     private Vector2 playerSpawnPosition;
     private Vector2 chaserSpawnPosition;
 
@@ -98,6 +99,10 @@ public class MapManager {
                     goalArea = new Rectangle(tileX, tileY, 2, 2);
                     System.out.println("Found goalArea at: (" + tileX + ", " + tileY + ")");
                     break;
+                case "random_teleport":
+                    randomTeleportArea = new Rectangle(tileX, tileY, 2, 2);
+                    System.out.println("Found random teleport at: (" + tileX + ", " + tileY + ")");
+                    break;
                 case "decrease_time" :
                     decreaseTimeArea = new Rectangle(tileX, tileY, 2, 2);
                     System.out.println("Found decreaseTimeArea at: (" + tileX + ", " + tileY + ")");
@@ -105,6 +110,7 @@ public class MapManager {
                 case "chaser_spawn" :
                     chaserSpawnPosition = new Vector2(tileX, tileY);
                     System.out.println("Found chaserPosition at: (" + tileX + ", " + tileY + ")");
+
             }
             // remember to add to checkSpecialTileCollision() to handle when playerPosition overlaps
         }
@@ -163,6 +169,15 @@ public class MapManager {
      */
     public Rectangle getDecreaseTimeArea() {
         return decreaseTimeArea;
+    }
+
+    /**
+     * Returns the random teleport rectangle from the map 
+     *
+     * @return Rectangle defining the random teleport area on the map
+     */
+    public Rectangle getRandomTeleportArea() {
+        return randomTeleportArea;
     }
 
     /**

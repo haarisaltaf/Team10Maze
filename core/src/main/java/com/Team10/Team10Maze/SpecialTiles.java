@@ -8,8 +8,10 @@ public class SpecialTiles {
     private Rectangle goalArea;
     private Rectangle addTimeArea;
     private Rectangle decreaseTimeArea;
+    private Rectangle randomTeleportArea;
     private boolean addTimeCollected = false;
     private boolean decreaseTimeCollected = false;
+    private boolean randomTeleportTriggered = false;
     private int specialCounter = 0;
 
     /**
@@ -21,10 +23,11 @@ public class SpecialTiles {
      * @param addTimeArea Tiled Rectangle defining the add time powerup area on the map
      * @param decreaseTimeArea Tiled Rectangle defining the decrease time debuff area on the map
      */
-    public SpecialTiles(Rectangle goalArea, Rectangle addTimeArea, Rectangle decreaseTimeArea) {
+    public SpecialTiles(Rectangle goalArea, Rectangle addTimeArea, Rectangle decreaseTimeArea, Rectangle randomTeleportArea) {
         this.goalArea = goalArea;
         this.addTimeArea = addTimeArea;
         this.decreaseTimeArea = decreaseTimeArea;
+        this.randomTeleportArea = randomTeleportArea;
     }
 
     /**
@@ -76,6 +79,16 @@ public class SpecialTiles {
         return false;
     }
 
+    public boolean checkRandomTeleportTriggered(Vector2 playerPosition) {
+        if (!randomTeleportTriggered && randomTeleportArea != null && randomTeleportArea.contains(playerPosition)) {
+            System.out.println("Time to teleport the player!");
+            specialCounter += 1;
+            randomTeleportTriggered = true;
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Returns the number of special events that have been triggered
      *
@@ -101,5 +114,15 @@ public class SpecialTiles {
      */
     public boolean isDecreaseTimeCollected() {
         return decreaseTimeCollected;
+    }
+
+
+    /**
+     * Returns whether the random teleport has been completed
+     *
+     * @return True if the random teleport has previously been done, false otherwise
+     */
+    public boolean hasRandomTeleportTriggered() {
+        return randomTeleportTriggered;
     }
 }
