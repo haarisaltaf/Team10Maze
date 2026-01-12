@@ -1,7 +1,30 @@
 # Team10Maze
 Maze game created using Java for ENG1.
 
-### THE PDF DOCUMENTS ARE STORED IN THE FOLDER ENTITLED 'PDF DOCUMENTS' AND ALSO AVAILABLE BELOW
+### Link to the GitHub Repository
+<a href="https://github.com/haarisaltaf/Team10Maze">GitHub Repository</a>
+
+<details>
+<summary><strong><span style="font-size: 1.6em;">Assessment 1 Documentation</span></strong></summary>
+<a href="https://drive.google.com/file/d/1Hgd4vTJ5N_BBwlT92-7vdJ-tNK3ZzNbp/view?usp=drive_link">Updated Requirements(Req1.pdf)</a><br>
+<a href="https://drive.google.com/file/d/1argPf9pQ2GAkArLMC12qPsLHICLNIhCC/view?usp=sharing">Updated Architecture(Arch1.pdf)</a><br>
+<a href="https://drive.google.com/file/d/1hRtcdaW9J4uew12p8ApdigCHjG9S_Rvn/view?usp=drive_link">Updated Method Selection and Planning(Plan1.pdf)</a>
+<br>
+<a href="https://drive.google.com/file/d/1Bnf6GXtxXmRcdF38c6dxREUE3fmsUMTX/view?usp=drive_link">Updated Risk Assessment and Mitigation(Risk1.pdf) </a>
+<br>
+<a href="https://drive.google.com/file/d/13XwSZQI3rr-pVcf84mjbjaLBU3u3-p4_/view?usp=sharing">Implementation(Impl1.pdf)</a>
+</details>
+
+<details>
+<summary><strong><span style="font-size: 1.6em;">Assessment 2 Documentation</span></strong></summary>
+<a href="https://drive.google.com/file/d/1Hgd4vTJ5N_BBwlT92-7vdJ-tNK3ZzNbp/view?usp=drive_link">Change Report (Change2.pdf)</a><br>
+<a href="https://drive.google.com/file/d/1argPf9pQ2GAkArLMC12qPsLHICLNIhCC/view?usp=sharing">Implementation (Impl2.pdf)</a><br>
+<a href="https://drive.google.com/file/d/1hRtcdaW9J4uew12p8ApdigCHjG9S_Rvn/view?usp=drive_link">Testing (Test2.pdf)</a>
+<br>
+<a href="https://drive.google.com/file/d/1Bnf6GXtxXmRcdF38c6dxREUE3fmsUMTX/view?usp=drive_link">User Evaluation (Eval2.pdf) </a>
+<br>
+<a href="https://drive.google.com/file/d/13XwSZQI3rr-pVcf84mjbjaLBU3u3-p4_/view?usp=sharing">Continuous Integration (CI2.pdf)</a>
+</details>
 
 ### Link to the GitHub Repository
 <a href="https://github.com/haarisaltaf/Team10Maze">GitHub Repository</a>
@@ -14,18 +37,6 @@ Maze game created using Java for ENG1.
 
 ### References and Notes
 References to the creators of assets are in the credits below
-
-<details>
-<summary><strong><span style="font-size: 1.6em;">All PDF Documents</span></strong></summary>
-<a href="https://drive.google.com/file/d/1Hgd4vTJ5N_BBwlT92-7vdJ-tNK3ZzNbp/view?usp=drive_link">Requirements PDF (Req1.pdf)</a><br>
-<a href="https://drive.google.com/file/d/1argPf9pQ2GAkArLMC12qPsLHICLNIhCC/view?usp=sharing">Architecture PDF (Arch1.pdf)</a><br>
-<a href="https://drive.google.com/file/d/1hRtcdaW9J4uew12p8ApdigCHjG9S_Rvn/view?usp=drive_link">Method Selection and Planning PDF(Plan1.pdf)</a>
-<br>
-<a href="https://drive.google.com/file/d/1Bnf6GXtxXmRcdF38c6dxREUE3fmsUMTX/view?usp=drive_link">Risk Assessment and Mitigation PDF (Risk1.pdf) </a>
-<br>
-<a href="https://drive.google.com/file/d/13XwSZQI3rr-pVcf84mjbjaLBU3u3-p4_/view?usp=sharing">Implementation PDF (Impl1.pdf)</a>
-
-</details>
 
 <details>
 <summary><strong><span style="font-size: 1.6em;">Architecture Documentation Additional Content</span></strong></summary>
