@@ -1,8 +1,8 @@
 # Team10Maze
-Maze game created using Java for ENG1.
+Maze game created using Java for ENG1 by Team 10 Cohort 1. 
 
 ### Link to the GitHub Repository
-<a href="https://github.com/haarisaltaf/Team10Maze">GitHub Repository</a>
+<a href="https://github.com/haarisaltaf/escape-from-uni">GitHub Repository</a>
 
 <details>
 <summary><strong><span style="font-size: 1.6em;">Assessment 1 Documentation</span></strong></summary>
